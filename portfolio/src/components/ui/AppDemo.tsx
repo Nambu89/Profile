@@ -14,6 +14,9 @@ interface App {
     url: string;
     color: string;
     icon: string;
+    apiUrl: string;
+    exampleQuestions: string[];
+    welcomeMessage: string;
 }
 
 const apps: App[] = [
@@ -23,7 +26,14 @@ const apps: App[] = [
         tagline: 'Asistente Fiscal Inteligente',
         url: 'https://impuestify.com',
         color: '#2d8a5e',
-        icon: '🧾'
+        icon: '🧾',
+        apiUrl: 'https://proud-celebration-production-2fbb.up.railway.app/api/demo/chat',
+        exampleQuestions: [
+            '¿Cuándo se presenta el IVA trimestral?',
+            '¿Qué es el modelo 303?',
+            '¿Cómo funciona la deducción del IVA?',
+        ],
+        welcomeMessage: '👋 ¡Hola! Soy el asistente fiscal de **Impuestify**.\n\nPregúntame sobre IVA, IRPF, impuestos de sociedades, plazos fiscales, o cualquier duda tributaria.\n\n💡 Esta es una versión demo limitada.'
     },
     {
         id: 'opoguardia',
@@ -31,7 +41,14 @@ const apps: App[] = [
         tagline: 'Preparación con IA',
         url: 'https://opoguardia.com',
         color: '#0078d4',
-        icon: '🦅'
+        icon: '🦅',
+        apiUrl: 'https://proyectopicolo-production.up.railway.app/api/v1/demo/chat',
+        exampleQuestions: [
+            '¿Cuáles son las funciones de la Guardia Civil?',
+            '¿Qué es el temario socio-cultural?',
+            '¿Cómo se estructura la organización territorial?',
+        ],
+        welcomeMessage: '👋 ¡Hola! Soy el tutor IA de **OpoGuardia**.\n\nPregúntame sobre el temario de Guardia Civil, funciones, organización, legislación, o cualquier duda sobre las oposiciones.\n\n💡 Esta es una versión demo limitada.'
     }
 ];
 
@@ -79,25 +96,16 @@ export const AppDemo: React.FC = () => {
 
             {/* Demo Container */}
             <div className="app-demo__content">
-                {activeApp.id === 'impuestify' ? (
-                    <ChatDemo />
-                ) : (
-                    <div className="app-demo__coming-soon">
-                        <div className="app-demo__coming-soon-icon">{activeApp.icon}</div>
-                        <h3 className="app-demo__coming-soon-title">
-                            Chat demo próximamente
-                        </h3>
-                        <p className="app-demo__coming-soon-text">
-                            El chat interactivo de {activeApp.name} estará disponible pronto.
-                        </p>
-                        <button
-                            className="app-demo__coming-soon-button"
-                            onClick={openInNewTab}
-                        >
-                            Visitar {activeApp.name} →
-                        </button>
-                    </div>
-                )}
+                <ChatDemo
+                    appId={activeApp.id}
+                    appName={activeApp.name}
+                    appIcon={activeApp.icon}
+                    appTagline={activeApp.tagline}
+                    appUrl={activeApp.url}
+                    apiUrl={activeApp.apiUrl}
+                    exampleQuestions={activeApp.exampleQuestions}
+                    welcomeMessage={activeApp.welcomeMessage}
+                />
             </div>
 
             {/* Footer */}

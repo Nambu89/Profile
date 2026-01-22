@@ -1,5 +1,5 @@
 /**
- * ChatDemo - Interactive chat interface for Impuestify demo
+ * ChatDemo - Interactive chat interface for demo apps
  */
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -21,16 +21,27 @@ interface ChatResponse {
     processing_time: number;
 }
 
-const DEMO_API_URL = 'https://proud-celebration-production-2fbb.up.railway.app/api/demo/chat';
+interface ChatDemoProps {
+    appId: string;
+    appName: string;
+    appIcon: string;
+    appTagline: string;
+    appUrl: string;
+    apiUrl: string;
+    exampleQuestions: string[];
+    welcomeMessage: string;
+}
 
-// Preguntas de ejemplo para guiar al usuario
-const EXAMPLE_QUESTIONS = [
-    '¿Cuándo se presenta el IVA trimestral?',
-    '¿Qué es el modelo 303?',
-    '¿Cómo funciona la deducción del IVA?',
-];
-
-export const ChatDemo: React.FC = () => {
+export const ChatDemo: React.FC<ChatDemoProps> = ({
+    appId,
+    appName,
+    appIcon,
+    appTagline,
+    appUrl,
+    apiUrl,
+    exampleQuestions,
+    welcomeMessage,
+}) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -53,10 +64,10 @@ export const ChatDemo: React.FC = () => {
         setMessages([{
             id: 'welcome',
             type: 'assistant',
-            content: '👋 ¡Hola! Soy el asistente fiscal de **Impuestify**.\n\nPregúntame sobre IVA, IRPF, impuestos de sociedades, plazos fiscales, o cualquier duda tributaria.\n\n💡 Esta es una versión demo limitada.',
+            content: welcomeMessage,
             timestamp: new Date(),
         }]);
-    }, []);
+    }, [welcomeMessage]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -75,7 +86,7 @@ export const ChatDemo: React.FC = () => {
         setError(null);
 
         try {
-            const response = await fetch(DEMO_API_URL, {
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,10 +141,10 @@ export const ChatDemo: React.FC = () => {
             {/* Header */}
             <div className="chat-demo__header">
                 <div className="chat-demo__header-content">
-                    <div className="chat-demo__icon">🧾</div>
+                    <div className="chat-demo__icon">{appIcon}</div>
                     <div>
-                        <h3 className="chat-demo__title">Impuestify</h3>
-                        <p className="chat-demo__subtitle">Asistente Fiscal Inteligente</p>
+                        <h3 className="chat-demo__title">{appName}</h3>
+                        <p className="chat-demo__subtitle">{appTagline}</p>
                     </div>
                 </div>
                 {remainingRequests !== null && (
@@ -196,11 +207,11 @@ export const ChatDemo: React.FC = () => {
             </div>
 
             {/* Example Questions */}
-            {messages.length === 1 && !isLoading && (
+            {messages.length === 1 && !isLoading && exampleQuestions.length > 0 && (
                 <div className="chat-demo__examples">
                     <p className="chat-demo__examples-label">💡 Prueba preguntando:</p>
                     <div className="chat-demo__examples-buttons">
-                        {EXAMPLE_QUESTIONS.map((question, idx) => (
+                        {exampleQuestions.map((question, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => handleExampleClick(question)}
@@ -243,7 +254,7 @@ export const ChatDemo: React.FC = () => {
             {/* Footer */}
             <div className="chat-demo__footer">
                 <a
-                    href="https://impuestify.com"
+                    href={appUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="chat-demo__footer-link"
