@@ -46,18 +46,20 @@ const getIcon = (iconName: string) => {
 export const Hero: React.FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const proofRef = useRef<HTMLParagraphElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
+    const socialRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
         // Ensure elements are visible first
-        gsap.set([titleRef.current, subtitleRef.current, ctaRef.current], {
+        gsap.set([titleRef.current, subtitleRef.current, proofRef.current, ctaRef.current, socialRef.current], {
             opacity: 1,
             visibility: 'visible'
         });
 
-        // Animate only position, not opacity
+        // Animate in sequence
         tl.from(titleRef.current, {
             y: 30,
             duration: 0.8,
@@ -67,11 +69,29 @@ export const Hero: React.FC = () => {
                 y: 20,
                 duration: 0.6
             }, '-=0.4')
+            .from(proofRef.current, {
+                y: 15,
+                duration: 0.5
+            }, '-=0.3')
             .from(ctaRef.current, {
                 y: 15,
                 duration: 0.5
-            }, '-=0.3');
+            }, '-=0.2')
+            .from(socialRef.current, {
+                y: 10,
+                duration: 0.4
+            }, '-=0.2');
     }, []);
+
+    const handleScrollToProjects = (e: React.MouseEvent) => {
+        e.preventDefault();
+        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleScrollToContact = (e: React.MouseEvent) => {
+        e.preventDefault();
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     const handleScrollDown = () => {
         document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
@@ -94,21 +114,50 @@ export const Hero: React.FC = () => {
                         {personalInfo.subtitle}
                     </p>
 
+                    {/* Proof Microcopy - Credibility line */}
+                    <p ref={proofRef} className="hero__proof">
+                        <span className="hero__proof-item">AI enterprise en producción</span>
+                        <span className="hero__proof-separator">•</span>
+                        <span className="hero__proof-item">Multi-agent systems</span>
+                        <span className="hero__proof-separator">•</span>
+                        <span className="hero__proof-item">RAG & Azure OpenAI</span>
+                    </p>
+
+                    {/* Dual CTA Buttons */}
                     <div ref={ctaRef} className="hero__cta">
-                        <div className="hero__social">
-                            {socialLinks.map((link) => (
-                                <a
-                                    key={link.id}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hero__social-link"
-                                    aria-label={link.name}
-                                >
-                                    {getIcon(link.icon)}
-                                </a>
-                            ))}
-                        </div>
+                        <a
+                            href="#projects"
+                            onClick={handleScrollToProjects}
+                            className="hero__cta-button hero__cta-button--primary"
+                        >
+                            <span>Ver proyectos</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a
+                            href="#contact"
+                            onClick={handleScrollToContact}
+                            className="hero__cta-button hero__cta-button--outline"
+                        >
+                            <span>Hablemos</span>
+                        </a>
+                    </div>
+
+                    {/* Social Links */}
+                    <div ref={socialRef} className="hero__social">
+                        {socialLinks.map((link) => (
+                            <a
+                                key={link.id}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hero__social-link"
+                                aria-label={link.name}
+                            >
+                                {getIcon(link.icon)}
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>

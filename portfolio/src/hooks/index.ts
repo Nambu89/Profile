@@ -1,2 +1,2 @@
-export { useScrollAnimation, useStaggerAnimation } from './useScrollAnimation';
+export { useScrollAnimation, useStaggerAnimation, useCinematicScroll } from './useScrollAnimation';
 export { useMousePosition, useRelativeMousePosition } from './useMousePosition';

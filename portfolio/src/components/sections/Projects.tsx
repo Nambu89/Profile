@@ -34,38 +34,83 @@ export const Projects: React.FC = () => {
                     subtitle="Soluciones de IA en producción real"
                 />
 
-                {/* Featured Projects */}
+                {/* Featured Projects - Case Studies */}
                 <div ref={projectsRef} className="projects__featured">
-                    {highlightedProjects.map((project) => (
+                    {highlightedProjects.map((project, index) => (
                         <article key={project.id} className="project-card project-card--featured">
                             <div className="project-card__content">
+                                {/* Header */}
                                 <div className="project-card__header">
-                                    <span className="project-card__status">{project.status}</span>
-                                    <span className="project-card__category">{project.category}</span>
+                                    <span className="project-card__number">{String(index + 1).padStart(2, '0')}</span>
+                                    <div className="project-card__header-tags">
+                                        <span className="project-card__status project-card__status--production">
+                                            {project.status}
+                                        </span>
+                                        <span className="project-card__category">{project.category}</span>
+                                    </div>
                                 </div>
 
+                                {/* Title */}
                                 <h3 className="project-card__title">{project.name}</h3>
                                 <p className="project-card__tagline">{project.tagline}</p>
 
-                                <p className="project-card__description">
-                                    {project.longDescription || project.description}
-                                </p>
+                                {/* Case Study Structure (if available) */}
+                                {project.problem ? (
+                                    <div className="project-card__case-study">
+                                        {/* Problem */}
+                                        <div className="case-study__section">
+                                            <h4 className="case-study__label">Problema</h4>
+                                            <p className="case-study__text">{project.problem}</p>
+                                        </div>
 
-                                <div className="project-card__features">
-                                    <h4 className="project-card__features-title">Características principales:</h4>
-                                    <ul className="project-card__features-list">
-                                        {project.features.slice(0, 4).map((feature, i) => (
-                                            <li key={i}>{feature}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                        {/* Approach */}
+                                        <div className="case-study__section">
+                                            <h4 className="case-study__label">Solución</h4>
+                                            <p className="case-study__text">{project.approach}</p>
+                                        </div>
 
+                                        {/* Impact */}
+                                        {project.impact && project.impact.length > 0 && (
+                                            <div className="case-study__section">
+                                                <h4 className="case-study__label">Impacto</h4>
+                                                <ul className="case-study__impact-list">
+                                                    {project.impact.map((item, i) => (
+                                                        <li key={i} className="case-study__impact-item">
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                                                <polyline points="20 6 9 17 4 12" />
+                                                            </svg>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+
+                                        {/* Role (optional) */}
+                                        {project.role && (
+                                            <div className="case-study__section case-study__section--role">
+                                                <h4 className="case-study__label">Mi rol</h4>
+                                                <p className="case-study__text case-study__text--small">{project.role}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p className="project-card__description">
+                                        {project.longDescription || project.description}
+                                    </p>
+                                )}
+
+                                {/* Tech Stack */}
                                 <div className="project-card__tech">
-                                    {project.technologies.map((tech) => (
-                                        <span key={tech} className="project-card__tech-tag">{tech}</span>
-                                    ))}
+                                    <h4 className="project-card__tech-title">Stack</h4>
+                                    <div className="project-card__tech-tags">
+                                        {project.technologies.map((tech) => (
+                                            <span key={tech} className="project-card__tech-tag">{tech}</span>
+                                        ))}
+                                    </div>
                                 </div>
 
+                                {/* Actions */}
                                 <div className="project-card__actions">
                                     {project.liveUrl && (
                                         <Button

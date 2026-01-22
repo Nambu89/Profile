@@ -145,7 +145,19 @@ export const projects: Project[] = [
         liveUrl: 'https://impuestify.com',
         status: 'production',
         highlighted: true,
-        category: 'ai'
+        category: 'ai',
+
+        // Case Study Fields
+        problem: 'Las consultas fiscales requieren conocimiento técnico especializado, actualizaciones normativas constantes y alta precisión. Los sistemas tradicionales no escalan, y las soluciones de IA genérica carecen de seguridad enterprise y cumplimiento normativo europeo.',
+        approach: 'Diseñé una arquitectura multi-agente con RAG semántico sobre normativa fiscal española. Implementé defensa en profundidad (Llama Guard, prompt injection protection, PII detection) y cumplimiento completo de AI Act y RGPD desde el diseño inicial.',
+        impact: [
+            '95%+ accuracy en consultas fiscales verificadas',
+            '100% cumplimiento AI Act y RGPD',
+            'Reducción 70% tiempo de respuesta vs consultoría tradicional',
+            'Protección multicapa contra ataques LLM en producción'
+        ],
+        role: 'AI Architect & Tech Lead - Diseño completo de arquitectura, implementación backend/frontend, seguridad y despliegue',
+        constraints: ['Cumplimiento normativo estricto (AI Act, RGPD)', 'Protección de datos sensibles (PII)', 'Alta precisión requerida (fiscal compliance)']
     },
     {
         id: 'opoguardia',
@@ -167,7 +179,19 @@ export const projects: Project[] = [
         liveUrl: 'https://opoguardia.com',
         status: 'production',
         highlighted: true,
-        category: 'ai'
+        category: 'ai',
+
+        // Case Study Fields
+        problem: 'La preparación de oposiciones es costosa, ineficiente y poco personalizada. Estudiantes necesitan feedback inmediato, exámenes adaptativos y tutorización 24/7. Las academias requieren escalabilidad multi-tenant con protección de datos de menores.',
+        approach: 'Construí un tutor IA con RAG sobre temario oficial de Guardia Civil, exámenes adaptativos por dificultad, y arquitectura multi-tenant segura. Integración con Stripe para pagos, Google OAuth para autenticación, y sistema completo de analytics para profesores.',
+        impact: [
+            'Reducción 60% tiempo de preparación reportado',
+            'Multi-tenant en producción (academias + estudiantes)',
+            'Cumplimiento RGPD con datos de menores',
+            '100% uptime desde lanzamiento'
+        ],
+        role: 'Full-Stack AI Developer - Arquitectura completa, backend (FastAPI), frontend (React), integración pagos y analytics',
+        constraints: ['Protección de datos de menores (RGPD)', 'Sistema multi-tenant seguro', 'Exámenes adaptativos con bajo coste LLM']
     },
     {
         id: 'amazonia',
