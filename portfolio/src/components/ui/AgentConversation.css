@@ -1,0 +1,283 @@
+/* =========================================
+   Agent Conversation - Glassmorphism Chat UI
+   ========================================= */
+
+.agent-conversation {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    pointer-events: auto;
+    z-index: 10;
+}
+
+/* Header */
+.agent-conversation__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(10, 20, 15, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(45, 138, 94, 0.2);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.agent-conversation__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.agent-conversation__icon {
+    font-size: var(--text-lg);
+}
+
+.agent-conversation__badge {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-electric);
+    background: rgba(210, 255, 0, 0.1);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(210, 255, 0, 0.2);
+}
+
+/* Messages Container */
+.agent-conversation__messages {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    background: rgba(10, 20, 15, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(45, 138, 94, 0.2);
+    border-right: 1px solid rgba(45, 138, 94, 0.2);
+    min-height: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.agent-conversation__messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.agent-conversation__messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.agent-conversation__messages::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border-radius: 10px;
+}
+
+/* Message */
+.message {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.message--user {
+    flex-direction: row-reverse;
+}
+
+/* Avatar */
+.message__avatar {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message__avatar-icon {
+    font-size: 18px;
+}
+
+/* Message Content */
+.message__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.message--user .message__content {
+    align-items: flex-end;
+}
+
+.message__header {
+    padding: 0 var(--space-sm);
+}
+
+.message__name {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+}
+
+/* Message Bubble */
+.message__bubble {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    max-width: 85%;
+}
+
+.message--user .message__bubble {
+    background: rgba(97, 218, 251, 0.1);
+    border-color: rgba(97, 218, 251, 0.2);
+}
+
+.message--coordinator .message__bubble {
+    background: rgba(255, 107, 107, 0.1);
+    border-color: rgba(255, 107, 107, 0.2);
+}
+
+.message--agent .message__bubble {
+    background: rgba(210, 255, 0, 0.1);
+    border-color: rgba(210, 255, 0, 0.2);
+}
+
+.message--rag .message__bubble {
+    background: rgba(45, 138, 94, 0.1);
+    border-color: rgba(45, 138, 94, 0.2);
+}
+
+.message__text {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* RAG Documents */
+.message__docs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.message__doc {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--color-accent-electric);
+    background: rgba(210, 255, 0, 0.05);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border-left: 2px solid var(--color-accent-electric);
+}
+
+/* Typing Indicator */
+.message--typing .message__bubble {
+    padding: var(--space-md);
+}
+
+.typing-indicator {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    30% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* Footer */
+.agent-conversation__footer {
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(10, 20, 15, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(45, 138, 94, 0.2);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    text-align: center;
+}
+
+.agent-conversation__info {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .agent-conversation {
+        max-width: 100%;
+        padding: 0 var(--space-sm);
+    }
+
+    .agent-conversation__messages {
+        min-height: 300px;
+        max-height: 400px;
+        padding: var(--space-lg);
+    }
+
+    .message__bubble {
+        max-width: 100%;
+    }
+
+    .message__avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .message__avatar-icon {
+        font-size: 16px;
+    }
+}
+
+/* Hide on very small screens */
+@media (max-width: 480px) {
+    .agent-conversation {
+        display: none;
+    }
+}
