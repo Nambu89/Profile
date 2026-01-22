@@ -1,10 +1,11 @@
 /**
- * Hero Section - Main landing area with 3D brain visualization
+ * Hero Section - Main landing area with Knowledge Graph + Agent Conversation
  */
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { NeuralBrain } from '../three';
+import { KnowledgeGraph } from '../three';
+import { AgentConversation } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Hero.css';
 
@@ -99,10 +100,17 @@ export const Hero: React.FC = () => {
 
     return (
         <section className="hero" id="hero">
+            {/* Background Layer (z-index: 0) - Knowledge Graph */}
             <div className="hero__background">
-                <NeuralBrain />
+                <KnowledgeGraph />
             </div>
 
+            {/* Middle Layer (z-index: 10) - Agent Conversation */}
+            <div className="hero__conversation">
+                <AgentConversation />
+            </div>
+
+            {/* Top Layer (z-index: 20) - Text Content */}
             <div className="hero__content">
                 <div className="hero__text">
                     <h1 ref={titleRef} className="hero__title">
