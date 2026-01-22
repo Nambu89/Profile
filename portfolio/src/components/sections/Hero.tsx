@@ -1,11 +1,10 @@
 /**
- * Hero Section - Main landing area with Knowledge Graph + Agent Conversation
+ * Hero Section - Main landing area with Live App Demo
  */
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { KnowledgeGraph } from '../three';
-import { AgentConversation } from '../ui';
+import { AppDemo } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Hero.css';
 
@@ -100,19 +99,9 @@ export const Hero: React.FC = () => {
 
     return (
         <section className="hero" id="hero">
-            {/* Background Layer (z-index: 0) - Knowledge Graph */}
-            <div className="hero__background">
-                <KnowledgeGraph />
-            </div>
-
-            {/* Middle Layer (z-index: 10) - Agent Conversation */}
-            <div className="hero__conversation">
-                <AgentConversation />
-            </div>
-
-            {/* Top Layer (z-index: 20) - Text Content */}
-            <div className="hero__content">
-                <div className="hero__text">
+            <div className="container">
+                {/* Text Content */}
+                <div className="hero__content">
                     <h1 ref={titleRef} className="hero__title">
                         <span className="hero__name">{personalInfo.name}</span>
                         <span className="hero__role">{personalInfo.title}</span>
@@ -122,7 +111,7 @@ export const Hero: React.FC = () => {
                         {personalInfo.subtitle}
                     </p>
 
-                    {/* Proof Microcopy - Credibility line */}
+                    {/* Proof Microcopy */}
                     <p ref={proofRef} className="hero__proof">
                         <span className="hero__proof-item">AI enterprise en producción</span>
                         <span className="hero__proof-separator">•</span>
@@ -138,7 +127,7 @@ export const Hero: React.FC = () => {
                             onClick={handleScrollToProjects}
                             className="hero__cta-button hero__cta-button--primary"
                         >
-                            <span>Ver proyectos</span>
+                            <span>Prueba el sistema</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
@@ -167,6 +156,11 @@ export const Hero: React.FC = () => {
                             </a>
                         ))}
                     </div>
+                </div>
+
+                {/* Live App Demo */}
+                <div className="hero__demo">
+                    <AppDemo />
                 </div>
             </div>
 
