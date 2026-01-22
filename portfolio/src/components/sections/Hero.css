@@ -9,58 +9,25 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: var(--space-3xl) 0;
 }
 
-.hero__background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-}
-
-.hero__background canvas {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-/* Agent Conversation Layer (Middle) */
-.hero__conversation {
-    position: absolute;
-    top: 15%;
-    right: 5%;
-    z-index: 5;
+.hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-3xl);
+    align-items: center;
     width: 100%;
-    max-width: 550px;
-    padding: var(--space-md);
-    pointer-events: none;
+    max-width: var(--container-max-width);
 }
 
-.hero__conversation * {
-    pointer-events: auto;
-}
-
-/* Text Content Layer (Top) */
+/* Text Content */
 .hero__content {
-    position: relative;
-    z-index: 20;
-    text-align: center;
-    padding: var(--container-padding);
-    pointer-events: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-2xl);
-}
-
-.hero__content * {
-    pointer-events: auto;
-}
-
-.hero__text {
-    max-width: 800px;
-    margin: 0 auto;
+    padding: var(--space-xl);
 }
 
 .hero__title {
@@ -213,6 +180,14 @@
     box-shadow: var(--shadow-glow);
 }
 
+/* App Demo Container */
+.hero__demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+}
+
 /* Scroll Indicator */
 .hero__scroll {
     position: absolute;
@@ -246,20 +221,36 @@
 
 /* Responsive */
 @media (max-width: 1200px) {
-    .hero__conversation {
-        right: 2%;
-        max-width: 450px;
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
     }
-}
 
-@media (max-width: 1024px) {
-    /* Hide conversation on tablets and smaller */
-    .hero__conversation {
-        display: none;
+    .hero__content {
+        align-items: center;
+        text-align: center;
+        padding: var(--space-lg);
+    }
+
+    .hero__demo {
+        order: -1;
+        min-height: 500px;
     }
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding: var(--space-2xl) 0;
+    }
+
+    .hero .container {
+        gap: var(--space-xl);
+    }
+
+    .hero__content {
+        padding: var(--space-md);
+    }
+
     .hero__name {
         font-size: var(--text-4xl);
     }
@@ -280,7 +271,6 @@
     .hero__cta {
         flex-direction: column;
         width: 100%;
-        padding: 0 var(--space-md);
     }
 
     .hero__cta-button {
@@ -296,5 +286,9 @@
     .hero__social-link {
         width: 44px;
         height: 44px;
+    }
+
+    .hero__demo {
+        min-height: 400px;
     }
 }
