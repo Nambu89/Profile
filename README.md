@@ -90,7 +90,7 @@ My AI projects implement enterprise-grade security:
 
 - **LinkedIn**: [Fernando Prada](https://www.linkedin.com/in/fernandopradagorge/)
 - **GitHub**: [@Nambu89](https://github.com/Nambu89)
-- **Email**: fernando.prada.gorge@gmail.com
+- **Email**: fernandopradagorge@gmail.com
 
 ## 📄 License
 
