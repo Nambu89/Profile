@@ -1,9 +1,10 @@
 /**
  * AppDemo - Live Demo of Production Apps
- * Shows Impuestify and OpoGuardia in iframe with tab switcher
+ * Shows Impuestify chat and OpoGuardia with tab switcher
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { ChatDemo } from './ChatDemo';
 import './AppDemo.css';
 
 interface App {
@@ -36,29 +37,6 @@ const apps: App[] = [
 
 export const AppDemo: React.FC = () => {
     const [activeApp, setActiveApp] = useState<App>(apps[0]);
-    const [iframeError, setIframeError] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setIsLoading(true);
-        setIframeError(false);
-
-        // Reset loading after 3s max
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 3000);
-
-        return () => clearTimeout(timer);
-    }, [activeApp]);
-
-    const handleIframeError = () => {
-        setIframeError(true);
-        setIsLoading(false);
-    };
-
-    const handleIframeLoad = () => {
-        setIsLoading(false);
-    };
 
     const openInNewTab = () => {
         window.open(activeApp.url, '_blank', 'noopener,noreferrer');
@@ -99,41 +77,26 @@ export const AppDemo: React.FC = () => {
                 </button>
             </div>
 
-            {/* Iframe Container */}
-            <div className="app-demo__iframe-container">
-                {isLoading && (
-                    <div className="app-demo__loading">
-                        <div className="app-demo__loading-spinner"></div>
-                        <p>Cargando {activeApp.name}...</p>
-                    </div>
-                )}
-
-                {iframeError ? (
-                    <div className="app-demo__error">
-                        <div className="app-demo__error-icon">🔒</div>
-                        <h3 className="app-demo__error-title">
-                            No se puede mostrar en iframe
+            {/* Demo Container */}
+            <div className="app-demo__content">
+                {activeApp.id === 'impuestify' ? (
+                    <ChatDemo />
+                ) : (
+                    <div className="app-demo__coming-soon">
+                        <div className="app-demo__coming-soon-icon">{activeApp.icon}</div>
+                        <h3 className="app-demo__coming-soon-title">
+                            Chat demo próximamente
                         </h3>
-                        <p className="app-demo__error-text">
-                            Por seguridad, {activeApp.name} no permite ser embebido.
+                        <p className="app-demo__coming-soon-text">
+                            El chat interactivo de {activeApp.name} estará disponible pronto.
                         </p>
                         <button
-                            className="app-demo__error-button"
+                            className="app-demo__coming-soon-button"
                             onClick={openInNewTab}
                         >
-                            Abrir {activeApp.name} →
+                            Visitar {activeApp.name} →
                         </button>
                     </div>
-                ) : (
-                    <iframe
-                        src={activeApp.url}
-                        title={`${activeApp.name} - ${activeApp.tagline}`}
-                        className="app-demo__iframe"
-                        loading="lazy"
-                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                        onError={handleIframeError}
-                        onLoad={handleIframeLoad}
-                    />
                 )}
             </div>
 
