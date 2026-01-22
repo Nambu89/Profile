@@ -1,0 +1,182 @@
+/* =========================================
+   Journey Section Styles - Timeline
+   ========================================= */
+
+.journey {
+    background: var(--color-bg-secondary);
+}
+
+.journey__timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.journey__item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--space-xl);
+    position: relative;
+}
+
+/* Marker & Line */
+.journey__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.journey__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transition: all var(--duration-normal) var(--ease-out-expo);
+    flex-shrink: 0;
+}
+
+.journey__item:hover .journey__icon {
+    border-color: var(--color-accent);
+    color: var(--color-accent-light);
+    box-shadow: var(--shadow-glow);
+}
+
+.journey__item--military .journey__icon {
+    color: #fbbf24;
+}
+
+.journey__item--military:hover .journey__icon {
+    border-color: #fbbf24;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.journey__item--tech .journey__icon {
+    color: var(--color-accent-light);
+}
+
+.journey__line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom,
+            var(--color-border) 0%,
+            var(--color-border) 50%,
+            transparent 100%);
+    margin-top: var(--space-sm);
+}
+
+/* Content */
+.journey__content {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.journey__item:hover .journey__content {
+    border-color: var(--color-accent);
+    transform: translateX(5px);
+}
+
+.journey__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.journey__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-accent-light);
+}
+
+.journey__type-badge {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+}
+
+.journey__role {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.journey__company {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+}
+
+.journey__description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+}
+
+.journey__highlights {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.journey__highlight {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    padding-left: var(--space-md);
+    position: relative;
+}
+
+.journey__highlight::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-light);
+}
+
+.journey__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.journey__tech-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-accent-light);
+    background: rgba(45, 138, 94, 0.1);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .journey__item {
+        grid-template-columns: 40px 1fr;
+        gap: var(--space-md);
+    }
+
+    .journey__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .journey__content {
+        padding: var(--space-lg);
+    }
+}

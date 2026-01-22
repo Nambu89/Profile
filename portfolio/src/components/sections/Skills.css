@@ -1,0 +1,99 @@
+/* =========================================
+   Skills Section Styles
+   ========================================= */
+
+.skills {
+    background: var(--color-bg-secondary);
+}
+
+.skills__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+}
+
+.skill-group {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: all var(--duration-normal) var(--ease-out-expo);
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.skill-group:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px) !important;
+}
+
+.skill-group__title {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.skill-group__items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+}
+
+.skill-item__name {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast);
+}
+
+.skill-item:hover .skill-item__name {
+    color: var(--color-text-primary);
+}
+
+.skill-item__level {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+/* Level Colors */
+.skill-item--expert .skill-item__level {
+    color: var(--color-accent-light);
+    background: rgba(45, 138, 94, 0.15);
+}
+
+.skill-item--advanced .skill-item__level {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.15);
+}
+
+.skill-item--intermediate .skill-item__level {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .skills__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .skills__grid {
+        grid-template-columns: 1fr;
+    }
+}

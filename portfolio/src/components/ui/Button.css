@@ -1,0 +1,106 @@
+/* =========================================
+   Button Component Styles
+   ========================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out-expo);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sizes */
+.btn--sm {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+}
+
+.btn--md {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-base);
+}
+
+.btn--lg {
+    padding: var(--space-lg) var(--space-2xl);
+    font-size: var(--text-lg);
+}
+
+/* Variants */
+.btn--primary {
+    background: var(--color-accent);
+    color: var(--color-bg-primary);
+    border: 2px solid var(--color-accent);
+}
+
+.btn--primary:hover {
+    background: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+.btn--secondary {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border);
+}
+
+.btn--secondary:hover {
+    background: var(--color-bg-card);
+    border-color: var(--color-accent);
+    color: var(--color-accent-light);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 2px solid transparent;
+}
+
+.btn--ghost:hover {
+    color: var(--color-accent-light);
+    background: rgba(45, 138, 94, 0.1);
+}
+
+.btn--outline {
+    background: transparent;
+    color: var(--color-accent-light);
+    border: 2px solid var(--color-accent);
+}
+
+.btn--outline:hover {
+    background: var(--color-accent);
+    color: var(--color-bg-primary);
+}
+
+/* Full Width */
+.btn--full-width {
+    width: 100%;
+}
+
+/* Icon */
+.btn__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn__icon svg {
+    width: 1.25em;
+    height: 1.25em;
+}
+
+/* Disabled */
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
