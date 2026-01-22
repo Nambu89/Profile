@@ -10,6 +10,8 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .journey__item {
@@ -17,6 +19,56 @@
     grid-template-columns: 60px 1fr;
     gap: var(--space-xl);
     position: relative;
+}
+
+/* Alternating Layout (Desktop only) */
+@media (min-width: 769px) {
+    .journey__timeline {
+        max-width: 1200px;
+    }
+
+    .journey__item {
+        grid-template-columns: 1fr 60px 1fr;
+        gap: var(--space-2xl);
+    }
+
+    /* Even items (right side) */
+    .journey__item:nth-child(even) .journey__content {
+        grid-column: 3;
+    }
+
+    .journey__item:nth-child(even) .journey__marker {
+        grid-column: 2;
+    }
+
+    .journey__item:nth-child(even)::before {
+        content: '';
+        grid-column: 1;
+    }
+
+    /* Odd items (left side) */
+    .journey__item:nth-child(odd) .journey__content {
+        grid-column: 1;
+        text-align: right;
+    }
+
+    .journey__item:nth-child(odd) .journey__marker {
+        grid-column: 2;
+    }
+
+    .journey__item:nth-child(odd)::after {
+        content: '';
+        grid-column: 3;
+    }
+
+    /* Hover effects */
+    .journey__item:nth-child(even):hover .journey__content {
+        transform: translateX(5px);
+    }
+
+    .journey__item:nth-child(odd):hover .journey__content {
+        transform: translateX(-5px);
+    }
 }
 
 /* Marker & Line */
@@ -89,12 +141,36 @@
     align-items: center;
     gap: var(--space-md);
     margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+/* Adjust header alignment for odd items on desktop */
+@media (min-width: 769px) {
+    .journey__item:nth-child(odd) .journey__header {
+        justify-content: flex-end;
+    }
+
+    .journey__item:nth-child(odd) .journey__highlights,
+    .journey__item:nth-child(odd) .journey__tech {
+        align-items: flex-end;
+    }
+
+    .journey__item:nth-child(odd) .journey__highlight {
+        padding-left: 0;
+        padding-right: var(--space-md);
+    }
+
+    .journey__item:nth-child(odd) .journey__highlight::before {
+        left: auto;
+        right: 0;
+    }
 }
 
 .journey__period {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--color-accent-light);
+    font-weight: 600;
+    color: var(--color-accent-electric);
 }
 
 .journey__type-badge {

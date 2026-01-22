@@ -73,24 +73,124 @@ export function useStaggerAnimation<T extends HTMLElement>(
 
         if (children.length === 0) return;
 
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         const ctx = gsap.context(() => {
-            gsap.from(children, {
-                opacity: 0,
-                y: 30,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: element,
-                    start,
-                    markers,
-                    toggleActions: 'play none none none'
-                }
-            });
+            if (prefersReducedMotion) {
+                // Simple fade-in for reduced motion
+                gsap.from(children, {
+                    opacity: 0,
+                    duration: 0.3,
+                    scrollTrigger: {
+                        trigger: element,
+                        start,
+                        markers,
+                        toggleActions: 'play none none none'
+                    }
+                });
+            } else {
+                // Full animation
+                gsap.from(children, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start,
+                        markers,
+                        toggleActions: 'play none none none'
+                    }
+                });
+            }
         }, element);
 
         return () => ctx.revert();
     }, [childSelector, options]);
+
+    return ref;
+}
+
+/**
+ * Cinematic scroll storytelling hook
+ * For more advanced scroll-linked animations (Lando-style)
+ */
+export function useCinematicScroll<T extends HTMLElement>(
+    variant: 'fade-slide' | 'scale-fade' | 'split-text' = 'fade-slide'
+) {
+    const ref = useRef<T>(null);
+
+    useEffect(() => {
+        const element = ref.current;
+        if (!element) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const ctx = gsap.context(() => {
+            if (prefersReducedMotion) {
+                // Reduced motion: simple fade
+                gsap.from(element, {
+                    opacity: 0,
+                    duration: 0.3,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 75%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            } else {
+                // Full cinematic animation based on variant
+                switch (variant) {
+                    case 'scale-fade':
+                        gsap.from(element, {
+                            opacity: 0,
+                            scale: 0.95,
+                            duration: 1.2,
+                            ease: 'power4.out',
+                            scrollTrigger: {
+                                trigger: element,
+                                start: 'top 70%',
+                                toggleActions: 'play none none none'
+                            }
+                        });
+                        break;
+
+                    case 'split-text':
+                        gsap.from(element, {
+                            opacity: 0,
+                            y: 40,
+                            rotationX: -10,
+                            duration: 1,
+                            ease: 'power3.out',
+                            scrollTrigger: {
+                                trigger: element,
+                                start: 'top 75%',
+                                toggleActions: 'play none none none'
+                            }
+                        });
+                        break;
+
+                    case 'fade-slide':
+                    default:
+                        gsap.from(element, {
+                            opacity: 0,
+                            y: 60,
+                            duration: 1,
+                            ease: 'power3.out',
+                            scrollTrigger: {
+                                trigger: element,
+                                start: 'top 75%',
+                                toggleActions: 'play none none none'
+                            }
+                        });
+                }
+            }
+        }, element);
+
+        return () => ctx.revert();
+    }, [variant]);
 
     return ref;
 }

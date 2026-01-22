@@ -59,6 +59,13 @@ export interface Project {
   status: 'production' | 'development' | 'archived';
   highlighted: boolean;
   category: 'ai' | 'web' | 'automation' | 'other';
+
+  // Case Study Fields (for highlighted projects)
+  problem?: string;
+  approach?: string;
+  impact?: string[];
+  role?: string;
+  constraints?: string[];
 }
 
 // =========================================

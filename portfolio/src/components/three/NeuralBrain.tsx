@@ -99,10 +99,20 @@ function generateSynapses(neurons: THREE.Vector3[], maxDistance: number): [numbe
     return synapses;
 }
 
+// Detect if mobile/tablet for performance optimization
+const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        || window.innerWidth < 768;
+};
+
 // Neural network brain core
 function NeuralCore() {
     const groupRef = useRef<THREE.Group>(null);
-    const [neurons] = useState(() => generateNeurons(80, 1.2));
+    const isMobile = useMemo(() => isMobileDevice(), []);
+
+    // Reduce neurons count on mobile for performance
+    const neuronCount = isMobile ? 40 : 80;
+    const [neurons] = useState(() => generateNeurons(neuronCount, 1.2));
     const [synapses] = useState(() => generateSynapses(neurons, 0.7));
 
     // Create geometry for synapses
@@ -123,11 +133,15 @@ function NeuralCore() {
         }
     });
 
+    // Lower geometry detail on mobile
+    const sphereSegments = isMobile ? 6 : 12;
+    const coreSegments = isMobile ? 16 : 32;
+
     return (
         <group ref={groupRef}>
             {/* Neurons (nodes) */}
             {neurons.map((pos, i) => (
-                <Sphere key={i} args={[0.04, 12, 12]} position={pos.toArray()}>
+                <Sphere key={i} args={[0.04, sphereSegments, sphereSegments]} position={pos.toArray()}>
                     <meshStandardMaterial
                         color="#2d8a5e"
                         emissive="#2d8a5e"
@@ -142,7 +156,7 @@ function NeuralCore() {
             </lineSegments>
 
             {/* Core glow */}
-            <Sphere args={[0.5, 32, 32]}>
+            <Sphere args={[0.5, coreSegments, coreSegments]}>
                 <meshBasicMaterial color="#1a4a32" transparent opacity={0.3} />
             </Sphere>
         </group>
@@ -280,7 +294,10 @@ function Connection({
 // Particle field
 function Particles() {
     const particlesRef = useRef<THREE.Points>(null);
-    const count = 150;
+    const isMobile = useMemo(() => isMobileDevice(), []);
+
+    // Reduce particle count on mobile
+    const count = isMobile ? 50 : 150;
 
     const positions = useMemo(() => {
         const pos = new Float32Array(count * 3);
@@ -290,7 +307,7 @@ function Particles() {
             pos[i + 2] = (Math.random() - 0.5) * 18;
         }
         return pos;
-    }, []);
+    }, [count]);
 
     useFrame((state) => {
         if (particlesRef.current) {
@@ -368,6 +385,8 @@ export const NeuralBrain: React.FC = () => {
         color: string;
     }>({ visible: false, name: '', description: '', color: '' });
 
+    const isMobile = useMemo(() => isMobileDevice(), []);
+
     const handleTechHover = useCallback((
         hovered: boolean,
         name: string,
@@ -382,7 +401,12 @@ export const NeuralBrain: React.FC = () => {
             <Canvas
                 camera={{ position: [0, 0, 7], fov: 50 }}
                 style={{ background: 'transparent' }}
-                gl={{ antialias: true, alpha: true }}
+                gl={{
+                    antialias: !isMobile, // Disable antialiasing on mobile
+                    alpha: true,
+                    powerPreference: 'high-performance'
+                }}
+                dpr={isMobile ? [1, 1.5] : [1, 2]} // Lower pixel ratio on mobile
             >
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[5, 5, 5]} intensity={0.7} />
