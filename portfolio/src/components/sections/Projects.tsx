@@ -1,12 +1,41 @@
 /**
- * Projects Section - Featured projects showcase
+ * Projects Section - Featured projects showcase with interactive demos
  */
 
 import React from 'react';
-import { SectionTitle, Button } from '../ui';
+import { SectionTitle, Button, ChatDemo } from '../ui';
 import { useScrollAnimation } from '../../hooks';
 import { projects } from '../../data/portfolio';
 import './Projects.css';
+
+// Chat configurations for each project
+const chatConfigs: Record<string, {
+    apiUrl: string;
+    exampleQuestions: string[];
+    welcomeMessage: string;
+    icon: string;
+}> = {
+    impuestify: {
+        apiUrl: 'https://proud-celebration-production-2fbb.up.railway.app/api/demo/chat',
+        exampleQuestions: [
+            '¿Cuándo se presenta el IVA trimestral?',
+            '¿Qué es el modelo 303?',
+            '¿Cómo funciona la deducción del IVA?',
+        ],
+        welcomeMessage: '👋 ¡Hola! Soy el asistente fiscal de **Impuestify**.\n\nPregúntame sobre IVA, IRPF, impuestos de sociedades, plazos fiscales, o cualquier duda tributaria.\n\n💡 Esta es una versión demo limitada.',
+        icon: '🧾'
+    },
+    opoguardia: {
+        apiUrl: 'https://proyectopicolo-production.up.railway.app/api/v1/demo/chat',
+        exampleQuestions: [
+            '¿Cuáles son las funciones de la Guardia Civil?',
+            '¿Qué es el temario socio-cultural?',
+            '¿Cómo se estructura la organización territorial?',
+        ],
+        welcomeMessage: '👋 ¡Hola! Soy el tutor IA de **OpoGuardia**.\n\nPregúntame sobre el temario de Guardia Civil, funciones, organización, legislación, o cualquier duda sobre las oposiciones.\n\n💡 Esta es una versión demo limitada.',
+        icon: '🦅'
+    }
+};
 
 const ExternalLinkIcon = () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -34,10 +63,15 @@ export const Projects: React.FC = () => {
                     subtitle="Soluciones de IA en producción real"
                 />
 
-                {/* Featured Projects - Case Studies */}
+                {/* Featured Projects - Case Studies with Live Demos */}
                 <div ref={projectsRef} className="projects__featured">
-                    {highlightedProjects.map((project, index) => (
-                        <article key={project.id} className="project-card project-card--featured">
+                    {highlightedProjects.map((project, index) => {
+                        const chatConfig = chatConfigs[project.id];
+                        const hasDemo = Boolean(chatConfig);
+
+                        return (
+                        <article key={project.id} className={`project-card project-card--featured ${hasDemo ? 'project-card--with-demo' : ''}`}>
+                            {/* Project Info */}
                             <div className="project-card__content">
                                 {/* Header */}
                                 <div className="project-card__header">
@@ -120,7 +154,7 @@ export const Projects: React.FC = () => {
                                             size="sm"
                                             icon={<ExternalLinkIcon />}
                                         >
-                                            Ver Demo
+                                            Ir a la app
                                         </Button>
                                     )}
                                     {project.githubUrl && (
@@ -136,8 +170,25 @@ export const Projects: React.FC = () => {
                                     )}
                                 </div>
                             </div>
+
+                            {/* Live Chat Demo */}
+                            {hasDemo && chatConfig && (
+                                <div className="project-card__demo">
+                                    <ChatDemo
+                                        appId={project.id}
+                                        appName={project.name}
+                                        appIcon={chatConfig.icon}
+                                        appTagline={project.tagline}
+                                        appUrl={project.liveUrl || '#'}
+                                        apiUrl={chatConfig.apiUrl}
+                                        exampleQuestions={chatConfig.exampleQuestions}
+                                        welcomeMessage={chatConfig.welcomeMessage}
+                                    />
+                                </div>
+                            )}
                         </article>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* Other Projects */}
