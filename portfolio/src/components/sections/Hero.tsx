@@ -1,10 +1,10 @@
 /**
- * Hero Section - Main landing area with Live App Demo
+ * Hero Section - Main landing area
  */
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { AppDemo } from '../ui';
+import { AnimatedGrid } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Hero.css';
 
@@ -99,6 +99,9 @@ export const Hero: React.FC = () => {
 
     return (
         <section className="hero" id="hero">
+            {/* Animated Background */}
+            <AnimatedGrid />
+
             <div className="container">
                 {/* Text Content */}
                 <div className="hero__content">
@@ -156,11 +159,6 @@ export const Hero: React.FC = () => {
                             </a>
                         ))}
                     </div>
-                </div>
-
-                {/* Live App Demo */}
-                <div className="hero__demo">
-                    <AppDemo />
                 </div>
             </div>
 
