@@ -1,0 +1,23 @@
+{
+  "name": "Fernando Prada - AI Architect & Tech Lead",
+  "short_name": "Fernando Prada",
+  "description": "Portfolio de Fernando Prada - Arquitecto de IA especializado en sistemas multi-agente y RAG",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a140f",
+  "theme_color": "#D2FF00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-simple.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    }
+  ]
+}
