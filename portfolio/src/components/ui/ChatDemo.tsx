@@ -33,7 +33,6 @@ interface ChatDemoProps {
 }
 
 export const ChatDemo: React.FC<ChatDemoProps> = ({
-    appId,
     appName,
     appIcon,
     appTagline,
@@ -46,7 +45,6 @@ export const ChatDemo: React.FC<ChatDemoProps> = ({
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [remainingRequests, setRemainingRequests] = useState<number | null>(null);
-    const [error, setError] = useState<string | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -83,7 +81,6 @@ export const ChatDemo: React.FC<ChatDemoProps> = ({
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
-        setError(null);
 
         try {
             const response = await fetch(apiUrl, {
@@ -116,8 +113,6 @@ export const ChatDemo: React.FC<ChatDemoProps> = ({
             setMessages(prev => [...prev, assistantMessage]);
             setRemainingRequests(data.remaining_requests);
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Error desconocido');
-
             const errorMessage: Message = {
                 id: (Date.now() + 1).toString(),
                 type: 'assistant',
