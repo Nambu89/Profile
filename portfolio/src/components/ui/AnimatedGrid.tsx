@@ -56,9 +56,9 @@ export const AnimatedGrid: React.FC = () => {
             </div>
 
             {/* Gradient Orbs */}
-            <div className="orb orb--1" ref={el => el && (orbs.current[0] = el)} />
-            <div className="orb orb--2" ref={el => el && (orbs.current[1] = el)} />
-            <div className="orb orb--3" ref={el => el && (orbs.current[2] = el)} />
+            <div className="orb orb--1" ref={el => { if (el) orbs.current[0] = el; }} />
+            <div className="orb orb--2" ref={el => { if (el) orbs.current[1] = el; }} />
+            <div className="orb orb--3" ref={el => { if (el) orbs.current[2] = el; }} />
 
             {/* Vignette overlay */}
             <div className="grid-vignette" />
