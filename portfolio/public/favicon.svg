@@ -1,0 +1,44 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#0a140f"/>
+
+  <!-- Neural Network Pattern -->
+  <g opacity="0.15">
+    <!-- Grid lines -->
+    <line x1="128" y1="0" x2="128" y2="512" stroke="#D2FF00" stroke-width="1"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="#D2FF00" stroke-width="1"/>
+    <line x1="384" y1="0" x2="384" y2="512" stroke="#D2FF00" stroke-width="1"/>
+    <line x1="0" y1="128" x2="512" y2="128" stroke="#D2FF00" stroke-width="1"/>
+    <line x1="0" y1="256" x2="512" y2="256" stroke="#D2FF00" stroke-width="1"/>
+    <line x1="0" y1="384" x2="512" y2="384" stroke="#D2FF00" stroke-width="1"/>
+  </g>
+
+  <!-- Main Icon: Neural Network Node -->
+  <g>
+    <!-- Center node (main) -->
+    <circle cx="256" cy="256" r="64" fill="#D2FF00" opacity="0.9"/>
+    <circle cx="256" cy="256" r="48" fill="#0a140f"/>
+    <circle cx="256" cy="256" r="24" fill="#D2FF00"/>
+
+    <!-- Outer nodes -->
+    <circle cx="160" cy="160" r="32" fill="#2d8a5e" opacity="0.8"/>
+    <circle cx="352" cy="160" r="32" fill="#2d8a5e" opacity="0.8"/>
+    <circle cx="160" cy="352" r="32" fill="#2d8a5e" opacity="0.8"/>
+    <circle cx="352" cy="352" r="32" fill="#2d8a5e" opacity="0.8"/>
+
+    <!-- Connections -->
+    <line x1="256" y1="256" x2="160" y2="160" stroke="#D2FF00" stroke-width="4" opacity="0.6"/>
+    <line x1="256" y1="256" x2="352" y2="160" stroke="#D2FF00" stroke-width="4" opacity="0.6"/>
+    <line x1="256" y1="256" x2="160" y2="352" stroke="#D2FF00" stroke-width="4" opacity="0.6"/>
+    <line x1="256" y1="256" x2="352" y2="352" stroke="#D2FF00" stroke-width="4" opacity="0.6"/>
+
+    <!-- Inner glow -->
+    <circle cx="256" cy="256" r="64" fill="none" stroke="#D2FF00" stroke-width="2" opacity="0.3"/>
+  </g>
+
+  <!-- Accent dots (representing multi-agent) -->
+  <circle cx="120" cy="256" r="12" fill="#D2FF00" opacity="0.5"/>
+  <circle cx="392" cy="256" r="12" fill="#D2FF00" opacity="0.5"/>
+  <circle cx="256" cy="120" r="12" fill="#D2FF00" opacity="0.5"/>
+  <circle cx="256" cy="392" r="12" fill="#D2FF00" opacity="0.5"/>
+</svg>
