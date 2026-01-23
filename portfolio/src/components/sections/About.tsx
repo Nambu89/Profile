@@ -32,6 +32,8 @@ export const About: React.FC = () => {
                                 src={profileImage}
                                 alt={personalInfo.name}
                                 className="about__image"
+                                loading="lazy"
+                                decoding="async"
                             />
                             <div className="about__image-border"></div>
                         </div>
@@ -67,7 +69,7 @@ export const About: React.FC = () => {
                                 rel="noopener noreferrer"
                                 className="about__certification"
                             >
-                                <img src={ai102Badge} alt="Azure AI Engineer Associate" className="about__certification-badge" />
+                                <img src={ai102Badge} alt="Azure AI Engineer Associate" className="about__certification-badge" loading="lazy" decoding="async" />
                                 <div className="about__certification-info">
                                     <span className="about__certification-title">{featuredCert.name}</span>
                                     <span className="about__certification-issuer">{featuredCert.issuer} • {featuredCert.date}</span>

@@ -14,7 +14,7 @@ export const personalInfo: PersonalInfo = {
     title: 'AI Architect & Tech Lead',
     subtitle: 'Building intelligent solutions that matter',
     location: 'Zaragoza, España',
-    email: 'fernando.prada@example.com', // TODO: Update with real email
+    email: 'fernandopradagorge@gmail.com',
     bio: [
         'Soy Fernando Prada, Arquitecto de IA y Líder Técnico en Devoteam. Mi trayectoria es única: del ejército español a la arquitectura de sistemas de inteligencia artificial.',
         'Diseño y desarrollo sistemas multi-agente, soluciones RAG y aplicaciones de IA en producción. Mi experiencia militar me enseñó disciplina, liderazgo y trabajo bajo presión, cualidades que aplico cada día en el desarrollo de tecnología.',
@@ -42,7 +42,7 @@ export const socialLinks: SocialLink[] = [
     {
         id: 'email',
         name: 'Email',
-        url: 'mailto:fernando.prada@example.com', // TODO: Update with real email
+        url: 'mailto:fernandopradagorge@gmail.com',
         icon: 'mail'
     }
 ];
@@ -182,16 +182,16 @@ export const projects: Project[] = [
         category: 'ai',
 
         // Case Study Fields
-        problem: 'La preparación de oposiciones es costosa, ineficiente y poco personalizada. Estudiantes necesitan feedback inmediato, exámenes adaptativos y tutorización 24/7. Las academias requieren escalabilidad multi-tenant con protección de datos de menores.',
+        problem: 'La preparación de oposiciones tiene altos costes económicos, puede llegar a ser ineficiente y poco personalizada. Estudiantes necesitan feedback inmediato, exámenes adaptativos y tutorización 24/7. Las academias requieren escalabilidad multi-tenant con protección de datos personales.',
         approach: 'Construí un tutor IA con RAG sobre temario oficial de Guardia Civil, exámenes adaptativos por dificultad, y arquitectura multi-tenant segura. Integración con Stripe para pagos, Google OAuth para autenticación, y sistema completo de analytics para profesores.',
         impact: [
             'Reducción 60% tiempo de preparación reportado',
             'Multi-tenant en producción (academias + estudiantes)',
-            'Cumplimiento RGPD con datos de menores',
+            'Cumplimiento RGPD con datos personales',
             '100% uptime desde lanzamiento'
         ],
         role: 'Full-Stack AI Developer - Arquitectura completa, backend (FastAPI), frontend (React), integración pagos y analytics',
-        constraints: ['Protección de datos de menores (RGPD)', 'Sistema multi-tenant seguro', 'Exámenes adaptativos con bajo coste LLM']
+        constraints: ['Protección de datos personales (RGPD)', 'Sistema multi-tenant seguro', 'Exámenes adaptativos con bajo coste LLM']
     },
     {
         id: 'amazonia',

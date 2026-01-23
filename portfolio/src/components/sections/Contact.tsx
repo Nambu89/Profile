@@ -68,6 +68,7 @@ export const Contact: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="contact__social-link"
+                                aria-label={`Visitar ${link.name}`}
                             >
                                 {link.icon === 'linkedin' && <LinkedInIcon />}
                                 {link.icon === 'github' && <GitHubIcon />}
