@@ -1,0 +1,93 @@
+.skill-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    cursor: default;
+    position: relative;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-fast) var(--ease-out-expo);
+}
+
+.skill-badge:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.skill-badge__name {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast);
+    display: inline-block;
+}
+
+.skill-badge:hover .skill-badge__name {
+    color: var(--color-text-primary);
+}
+
+.skill-badge__level {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    display: inline-block;
+    position: relative;
+}
+
+/* Level Colors */
+.skill-badge--expert .skill-badge__level {
+    color: var(--color-accent-light);
+    background: rgba(45, 138, 94, 0.15);
+    border: 1px solid rgba(45, 138, 94, 0.3);
+}
+
+.skill-badge--expert:hover .skill-badge__level {
+    background: rgba(45, 138, 94, 0.25);
+}
+
+.skill-badge--advanced .skill-badge__level {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.15);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.skill-badge--advanced:hover .skill-badge__level {
+    background: rgba(96, 165, 250, 0.25);
+}
+
+.skill-badge--intermediate .skill-badge__level {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.skill-badge--intermediate:hover .skill-badge__level {
+    background: rgba(251, 191, 36, 0.25);
+}
+
+/* Pulse animation for expert skills */
+@keyframes pulse-expert {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(45, 138, 94, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 4px rgba(45, 138, 94, 0);
+    }
+}
+
+.skill-badge--expert:hover {
+    animation: pulse-expert 2s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .skill-badge {
+        animation: none !important;
+    }
+
+    .skill-badge__name,
+    .skill-badge__level {
+        transition: none;
+    }
+}

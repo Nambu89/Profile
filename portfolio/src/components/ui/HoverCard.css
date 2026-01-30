@@ -1,0 +1,54 @@
+.hover-card-wrapper {
+    perspective: 1000px;
+}
+
+.hover-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.hover-card__glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(45, 138, 94, 0.4) 0%,
+        rgba(210, 255, 0, 0.2) 40%,
+        transparent 70%
+    );
+    filter: blur(40px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    mix-blend-mode: screen;
+}
+
+/* Disable on mobile for performance */
+@media (max-width: 768px) {
+    .hover-card-wrapper {
+        perspective: none;
+    }
+
+    .hover-card {
+        transform-style: flat;
+    }
+
+    .hover-card__glow {
+        display: none;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hover-card {
+        transform: none !important;
+    }
+
+    .hover-card__glow {
+        display: none;
+    }
+}

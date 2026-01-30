@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { SectionTitle, Button } from '../ui';
+import { SectionTitle, MagneticButton } from '../ui';
 import { useScrollAnimation } from '../../hooks';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Contact.css';
@@ -49,15 +49,15 @@ export const Contact: React.FC = () => {
                     </div>
 
                     <div className="contact__cta">
-                        <Button
+                        <MagneticButton
                             href={`mailto:${personalInfo.email}`}
                             variant="primary"
                             size="lg"
                             icon={<EmailIcon />}
-                            iconPosition="left"
+                            strength={0.6}
                         >
                             Envíame un email
-                        </Button>
+                        </MagneticButton>
                     </div>
 
                     <div className="contact__social">

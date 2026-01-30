@@ -6,6 +6,7 @@
 import React from 'react';
 import { Navbar, MouseGlow } from './components/layout';
 import { Hero, About, Journey, Projects, Skills, Contact } from './components/sections';
+import { ScrollProgress } from './components/ui';
 
 // Styles
 import './styles/variables.css';
@@ -15,6 +16,7 @@ import './styles/animations.css';
 const App: React.FC = () => {
   return (
     <>
+      <ScrollProgress />
       <MouseGlow />
       <Navbar />
       <main>

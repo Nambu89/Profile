@@ -4,7 +4,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { AnimatedGrid } from '../ui';
+import { ParticleBackground, BlurText } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Hero.css';
 
@@ -100,14 +100,19 @@ export const Hero: React.FC = () => {
     return (
         <section className="hero" id="hero">
             {/* Animated Background */}
-            <AnimatedGrid />
+            <ParticleBackground />
+
 
             <div className="container">
                 {/* Text Content */}
                 <div className="hero__content">
                     <h1 ref={titleRef} className="hero__title">
-                        <span className="hero__name">{personalInfo.name}</span>
-                        <span className="hero__role">{personalInfo.title}</span>
+                        <span className="hero__name">
+                            <BlurText text={personalInfo.name} delay={0.3} duration={1} />
+                        </span>
+                        <span className="hero__role">
+                            <BlurText text={personalInfo.title} delay={0.6} duration={1.2} />
+                        </span>
                     </h1>
 
                     <p ref={subtitleRef} className="hero__subtitle">

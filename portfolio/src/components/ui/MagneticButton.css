@@ -1,0 +1,125 @@
+.magnetic-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius-md);
+    transition: all var(--duration-fast) var(--ease-out-expo);
+    overflow: hidden;
+    will-change: transform;
+}
+
+.magnetic-button__content {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    will-change: transform;
+}
+
+.magnetic-button__text {
+    display: inline-block;
+}
+
+.magnetic-button__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magnetic-button__glow {
+    position: absolute;
+    inset: -2px;
+    background: radial-gradient(
+        circle at center,
+        rgba(45, 138, 94, 0.4) 0%,
+        rgba(210, 255, 0, 0.2) 50%,
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out-expo);
+    z-index: 0;
+    border-radius: inherit;
+}
+
+.magnetic-button:hover .magnetic-button__glow {
+    opacity: 1;
+}
+
+/* Variants */
+.magnetic-button--primary {
+    background: var(--color-accent-electric);
+    color: var(--color-bg-primary);
+}
+
+.magnetic-button--primary:hover {
+    background: #e0ff3a;
+    box-shadow: 0 0 30px rgba(210, 255, 0, 0.4);
+}
+
+.magnetic-button--secondary {
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+}
+
+.magnetic-button--secondary:hover {
+    background: var(--color-accent-light);
+}
+
+.magnetic-button--outline {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border);
+}
+
+.magnetic-button--outline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-light);
+    background: rgba(45, 138, 94, 0.1);
+}
+
+/* Sizes */
+.magnetic-button--sm {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+}
+
+.magnetic-button--md {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-base);
+}
+
+.magnetic-button--lg {
+    padding: var(--space-lg) var(--space-2xl);
+    font-size: var(--text-lg);
+}
+
+/* Disable effect on mobile */
+@media (max-width: 768px) {
+    .magnetic-button {
+        transform: none !important;
+    }
+
+    .magnetic-button__content {
+        transform: none !important;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .magnetic-button,
+    .magnetic-button__content {
+        transform: none !important;
+        transition: none;
+    }
+
+    .magnetic-button__glow {
+        display: none;
+    }
+}

@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { SectionTitle, Button, ChatDemo } from '../ui';
+import { SectionTitle, Button, ChatDemo, HoverCard } from '../ui';
 import { useScrollAnimation } from '../../hooks';
 import { projects } from '../../data/portfolio';
 import './Projects.css';
@@ -16,7 +16,8 @@ const chatConfigs: Record<string, {
     icon: string;
 }> = {
     impuestify: {
-        apiUrl: 'https://proud-celebration-production-2fbb.up.railway.app/api/demo/chat',
+        // Use relative path to leverage Vite proxy (avoids CORS)
+        apiUrl: '/api/demo/chat',
         exampleQuestions: [
             '¿Cuándo se presenta el IVA trimestral?',
             '¿Qué es el modelo 303?',
@@ -26,7 +27,8 @@ const chatConfigs: Record<string, {
         icon: '🧾'
     },
     opoguardia: {
-        apiUrl: 'https://proyectopicolo-production.up.railway.app/api/v1/demo/chat',
+        // Use relative path to leverage Vite proxy (avoids CORS)
+        apiUrl: '/api/v1/demo/chat',
         exampleQuestions: [
             '¿Cuáles son las funciones de la Guardia Civil?',
             '¿Qué es el temario socio-cultural?',
@@ -197,34 +199,36 @@ export const Projects: React.FC = () => {
                         <h3 className="projects__other-title">Otros Proyectos</h3>
                         <div className="projects__grid">
                             {otherProjects.map((project) => (
-                                <article key={project.id} className="project-card project-card--small">
-                                    <div className="project-card__header">
-                                        <span className="project-card__category">{project.category}</span>
-                                    </div>
+                                <HoverCard key={project.id} intensity={0.5}>
+                                    <article className="project-card project-card--small">
+                                        <div className="project-card__header">
+                                            <span className="project-card__category">{project.category}</span>
+                                        </div>
 
-                                    <h4 className="project-card__title">{project.name}</h4>
-                                    <p className="project-card__tagline">{project.tagline}</p>
-                                    <p className="project-card__description">{project.description}</p>
+                                        <h4 className="project-card__title">{project.name}</h4>
+                                        <p className="project-card__tagline">{project.tagline}</p>
+                                        <p className="project-card__description">{project.description}</p>
 
-                                    <div className="project-card__tech">
-                                        {project.technologies.slice(0, 3).map((tech) => (
-                                            <span key={tech} className="project-card__tech-tag">{tech}</span>
-                                        ))}
-                                    </div>
+                                        <div className="project-card__tech">
+                                            {project.technologies.slice(0, 3).map((tech) => (
+                                                <span key={tech} className="project-card__tech-tag">{tech}</span>
+                                            ))}
+                                        </div>
 
-                                    <div className="project-card__actions">
-                                        {project.githubUrl && (
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="project-card__link"
-                                            >
-                                                <GitHubIcon /> Ver código
-                                            </a>
-                                        )}
-                                    </div>
-                                </article>
+                                        <div className="project-card__actions">
+                                            {project.githubUrl && (
+                                                <a
+                                                    href={project.githubUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="project-card__link"
+                                                >
+                                                    <GitHubIcon /> Ver código
+                                                </a>
+                                            )}
+                                        </div>
+                                    </article>
+                                </HoverCard>
                             ))}
                         </div>
                     </>

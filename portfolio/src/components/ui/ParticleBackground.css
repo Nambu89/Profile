@@ -1,0 +1,110 @@
+.particle-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.particle-background__canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.particle-background__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    pointer-events: none;
+    animation: float 15s ease-in-out infinite;
+}
+
+.particle-background__orb--1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(45, 138, 94, 0.6) 0%, transparent 70%);
+    top: 10%;
+    left: 20%;
+    animation-duration: 20s;
+}
+
+.particle-background__orb--2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(210, 255, 0, 0.3) 0%, transparent 70%);
+    bottom: 20%;
+    right: 15%;
+    animation-duration: 18s;
+    animation-delay: -5s;
+}
+
+.particle-background__orb--3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(45, 138, 94, 0.4) 0%, transparent 70%);
+    top: 60%;
+    left: 60%;
+    animation-duration: 22s;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(50px, -30px) scale(1.1);
+    }
+    66% {
+        transform: translate(-40px, 40px) scale(0.9);
+    }
+}
+
+.particle-background__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        transparent 40%,
+        rgba(10, 15, 13, 0.4) 70%,
+        rgba(10, 15, 13, 0.8) 100%
+    );
+    pointer-events: none;
+}
+
+/* Performance optimization */
+@media (prefers-reduced-motion: reduce) {
+    .particle-background__orb {
+        animation: none;
+    }
+
+    .particle-background__canvas {
+        display: none;
+    }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .particle-background__orb {
+        filter: blur(60px);
+    }
+
+    .particle-background__orb--1 {
+        width: 250px;
+        height: 250px;
+    }
+
+    .particle-background__orb--2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .particle-background__orb--3 {
+        width: 220px;
+        height: 220px;
+    }
+}

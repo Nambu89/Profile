@@ -1,0 +1,13 @@
+.blur-text {
+    display: inline-block;
+}
+
+.blur-text__word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.blur-text__item {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+}

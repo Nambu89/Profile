@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { SectionTitle } from '../ui';
+import { SectionTitle, SkillBadge } from '../ui';
 import { useStaggerAnimation } from '../../hooks';
 import { skillGroups } from '../../data/portfolio';
 import './Skills.css';
@@ -25,14 +25,13 @@ export const Skills: React.FC = () => {
                         <div key={group.category} className="skill-group">
                             <h3 className="skill-group__title">{group.title}</h3>
                             <div className="skill-group__items">
-                                {group.skills.map((skill) => (
-                                    <div
+                                {group.skills.map((skill, index) => (
+                                    <SkillBadge
                                         key={skill.id}
-                                        className={`skill-item skill-item--${skill.level}`}
-                                    >
-                                        <span className="skill-item__name">{skill.name}</span>
-                                        <span className="skill-item__level">{skill.level}</span>
-                                    </div>
+                                        name={skill.name}
+                                        level={skill.level}
+                                        delay={index * 0.05}
+                                    />
                                 ))}
                             </div>
                         </div>
