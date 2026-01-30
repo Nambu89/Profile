@@ -3,12 +3,24 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { navItems, socialLinks } from '../../data/portfolio';
+import { useTranslation } from 'react-i18next';
+import { socialLinks } from '../../data/portfolio';
+import { LanguageSelector } from '../ui';
 import './Navbar.css';
 
 export const Navbar: React.FC = () => {
+    const { t } = useTranslation();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Dynamic nav items from translations
+    const navItems = [
+        { id: 'about', href: '#about', label: t('nav.about') },
+        { id: 'journey', href: '#journey', label: t('nav.journey') },
+        { id: 'projects', href: '#projects', label: t('nav.projects') },
+        { id: 'skills', href: '#skills', label: t('nav.skills') },
+        { id: 'contact', href: '#contact', label: t('nav.contact') }
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -71,6 +83,8 @@ export const Navbar: React.FC = () => {
                         ))}
                     </nav>
 
+                    <LanguageSelector />
+
                     <button
                         className={`navbar__hamburger ${isMenuOpen ? 'navbar__hamburger--open' : ''}`}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -130,6 +144,16 @@ export const Navbar: React.FC = () => {
                     ))}
                 </div>
 
+                {/* Language Selector */}
+                <div
+                    className="mobile-menu__language"
+                    style={{
+                        transitionDelay: isMenuOpen ? `${navItems.length * 0.1 + socialLinks.length * 0.05 + 0.25}s` : '0s'
+                    }}
+                >
+                    <LanguageSelector />
+                </div>
+
                 {/* Footer Text */}
                 <div
                     className="mobile-menu__footer"
@@ -137,7 +161,7 @@ export const Navbar: React.FC = () => {
                         transitionDelay: isMenuOpen ? `${navItems.length * 0.1 + socialLinks.length * 0.05 + 0.3}s` : '0s'
                     }}
                 >
-                    <p>AI Architect & Tech Lead</p>
+                    <p>{t('hero.title')}</p>
                 </div>
             </div>
         </>

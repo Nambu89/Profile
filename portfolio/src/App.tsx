@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar, MouseGlow } from './components/layout';
 import { Hero, About, Journey, Projects, Skills, Contact } from './components/sections';
 import { ScrollProgress } from './components/ui';
@@ -16,6 +17,7 @@ import './styles/animations.css';
 const App: React.FC = () => {
   return (
     <>
+      <Analytics />
       <ScrollProgress />
       <MouseGlow />
       <Navbar />

@@ -3,6 +3,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ParticleBackground, BlurText } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
@@ -44,6 +45,7 @@ const getIcon = (iconName: string) => {
 };
 
 export const Hero: React.FC = () => {
+    const { t } = useTranslation();
     const titleRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const proofRef = useRef<HTMLParagraphElement>(null);
@@ -111,21 +113,21 @@ export const Hero: React.FC = () => {
                             <BlurText text={personalInfo.name} delay={0.3} duration={1} />
                         </span>
                         <span className="hero__role">
-                            <BlurText text={personalInfo.title} delay={0.6} duration={1.2} />
+                            <BlurText text={t('hero.title')} delay={0.6} duration={1.2} />
                         </span>
                     </h1>
 
                     <p ref={subtitleRef} className="hero__subtitle">
-                        {personalInfo.subtitle}
+                        {t('hero.subtitle')}
                     </p>
 
                     {/* Proof Microcopy */}
                     <p ref={proofRef} className="hero__proof">
-                        <span className="hero__proof-item">AI enterprise en producción</span>
+                        <span className="hero__proof-item">{t('hero.proof1')}</span>
                         <span className="hero__proof-separator">•</span>
-                        <span className="hero__proof-item">Multi-agent systems</span>
+                        <span className="hero__proof-item">{t('hero.proof2')}</span>
                         <span className="hero__proof-separator">•</span>
-                        <span className="hero__proof-item">RAG & Azure OpenAI</span>
+                        <span className="hero__proof-item">{t('hero.proof3')}</span>
                     </p>
 
                     {/* Dual CTA Buttons */}
@@ -135,7 +137,7 @@ export const Hero: React.FC = () => {
                             onClick={handleScrollToProjects}
                             className="hero__cta-button hero__cta-button--primary"
                         >
-                            <span>Prueba el sistema</span>
+                            <span>{t('hero.cta1')}</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
@@ -145,7 +147,7 @@ export const Hero: React.FC = () => {
                             onClick={handleScrollToContact}
                             className="hero__cta-button hero__cta-button--outline"
                         >
-                            <span>Hablemos</span>
+                            <span>{t('hero.cta2')}</span>
                         </a>
                     </div>
 
@@ -168,7 +170,7 @@ export const Hero: React.FC = () => {
             </div>
 
             <button className="hero__scroll" onClick={handleScrollDown} aria-label="Scroll down">
-                <span className="hero__scroll-text">Scroll</span>
+                <span className="hero__scroll-text">{t('hero.scroll')}</span>
                 <span className="hero__scroll-icon">
                     <ArrowDown />
                 </span>
