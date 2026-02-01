@@ -46,7 +46,7 @@ class ChatRequest(BaseModel):
     )
     language: Optional[str] = Field(
         default="es",
-        regex="^(es|en)$",
+        pattern="^(es|en)$",
         description="Response language (es or en)"
     )
     conversation_history: Optional[List[Dict]] = Field(
@@ -230,7 +230,7 @@ async def chat(request: ChatRequest, req: Request):
         return ChatResponse(
             answer=result["answer"],
             sources=result.get("sources", []),
-            model=result.get("model", "gpt-4o-mini"),
+            model=result.get("model", "gpt-5-mini"),
             tokens_used=result.get("tokens_used", 0),
             warnings=safety_check.get("warnings", [])
         )
