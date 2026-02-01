@@ -86,5 +86,23 @@ export const es = {
     button: 'Envíame un email',
     footer: 'Construido con React, TypeScript, Three.js y mucho',
     rights: 'Todos los derechos reservados.'
+  },
+
+  // FerBot
+  ferbot: {
+    title: 'FerBot',
+    subtitle: 'Mi alter ego de IA',
+    online: 'Online',
+    openChat: 'Abrir chat',
+    closeChat: 'Cerrar chat',
+    placeholder: 'Pregúntame sobre mi experiencia, proyectos...',
+    send: 'Enviar',
+    welcome: '¡Hola! 👋 Soy FerBot, el alter ego de IA de Fernando. Pregúntame sobre su experiencia, proyectos, skills o cualquier cosa que quieras saber sobre él.',
+    poweredBy: 'Powered by OpenAI GPT-4o-mini',
+    errors: {
+      rateLimit: 'Has alcanzado el límite de mensajes. Por favor, espera unos minutos.',
+      serverError: 'Error al conectar con el servidor. Inténtalo de nuevo.',
+      unknown: 'Ha ocurrido un error inesperado. Inténtalo de nuevo.'
+    }
   }
 };

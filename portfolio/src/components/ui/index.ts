@@ -10,3 +10,4 @@ export { SkillBadge } from './SkillBadge';
 export { MagneticButton } from './MagneticButton';
 export { ScrollProgress } from './ScrollProgress';
 export { LanguageSelector } from './LanguageSelector';
+export { FerBot } from './FerBot';

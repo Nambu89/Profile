@@ -90,9 +90,10 @@ export const Hero: React.FC = () => {
         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    const handleScrollToContact = (e: React.MouseEvent) => {
+    const handleOpenFerBot = (e: React.MouseEvent) => {
         e.preventDefault();
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        // Trigger FerBot open by dispatching a custom event
+        window.dispatchEvent(new CustomEvent('openFerBot'));
     };
 
     const handleScrollDown = () => {
@@ -142,13 +143,12 @@ export const Hero: React.FC = () => {
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </a>
-                        <a
-                            href="#contact"
-                            onClick={handleScrollToContact}
+                        <button
+                            onClick={handleOpenFerBot}
                             className="hero__cta-button hero__cta-button--outline"
                         >
                             <span>{t('hero.cta2')}</span>
-                        </a>
+                        </button>
                     </div>
 
                     {/* Social Links */}

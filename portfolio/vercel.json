@@ -2,7 +2,24 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "functions": {
+    "api/**/*.py": {
+      "runtime": "python3.9"
+    }
+  },
   "rewrites": [
+    {
+      "source": "/api/ferbot/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/api/demo/(.*)",
+      "destination": "https://taxia-production.up.railway.app/api/demo/$1"
+    },
+    {
+      "source": "/api/v1/demo/(.*)",
+      "destination": "https://proyectopicolo-production.up.railway.app/api/v1/demo/$1"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
@@ -15,6 +32,23 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
         }
       ]
     },
