@@ -119,7 +119,7 @@ async def add_security_headers(request: Request, call_next):
     return response
 
 
-@app.post("/api/chat", response_model=ChatResponse)
+@app.post("/", response_model=ChatResponse)
 async def chat(request: ChatRequest, req: Request):
     """
     Chat endpoint for FerBot with comprehensive security
