@@ -98,7 +98,7 @@ export const en = {
     placeholder: 'Ask me about my experience, projects...',
     send: 'Send',
     welcome: "Hi! 👋 I'm FerBot, Fernando's AI alter ego. Ask me about his experience, projects, skills, or anything you'd like to know about him.",
-    poweredBy: 'Powered by OpenAI GPT-5-mini',
+    poweredBy: 'Powered by OpenAI GPT 5 Mini',
     errors: {
       rateLimit: 'You have reached the message limit. Please wait a few minutes.',
       serverError: 'Error connecting to the server. Please try again.',

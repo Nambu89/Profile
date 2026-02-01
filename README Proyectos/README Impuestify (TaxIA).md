@@ -116,7 +116,7 @@ Impuestify es un asistente fiscal especializado en normativa española que utili
 - Turso (Database - SQLite distribuido)
 - Upstash Redis (Cache + Rate Limiting)
 - **Upstash Vector** (Semantic Cache)
-- **OpenAI API (GPT-4o-mini / GPT-5-mini)**
+- **OpenAI API (GPT-5-mini)**
 - **Groq API** (Llama Guard 4 - Content Moderation)
 - PyMuPDF4LLM (PDF extraction optimizada para LLMs)
 - pypdf (PDF validation)
