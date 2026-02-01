@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Dict, List
 from openai import OpenAI
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
 import pymupdf4llm
 
 # Global cache for embeddings (persists across warm starts)
@@ -114,11 +113,17 @@ class EmbeddingService:
         if not query_embedding:
             return []
 
-        # Calculate similarities
-        query_vec = np.array([query_embedding])
+        # Calculate similarities using numpy (replace sklearn.cosine_similarity)
+        query_vec = np.array(query_embedding)
         cache_vecs = np.array([item["embedding"] for item in self.embeddings_cache])
 
-        similarities = cosine_similarity(query_vec, cache_vecs)[0]
+        # Cosine similarity: dot(A, B) / (norm(A) * norm(B))
+        # Normalize vectors first for efficiency
+        query_norm = query_vec / np.linalg.norm(query_vec)
+        cache_norms = cache_vecs / np.linalg.norm(cache_vecs, axis=1, keepdims=True)
+
+        # Dot product gives cosine similarity when vectors are normalized
+        similarities = np.dot(cache_norms, query_norm)
 
         # Get top-k results
         top_indices = np.argsort(similarities)[-top_k:][::-1]
