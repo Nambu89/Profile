@@ -20,7 +20,6 @@ export const FerBot: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     const chatRef = useRef<HTMLDivElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -99,7 +98,6 @@ export const FerBot: React.FC = () => {
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
-        setError(null);
 
         try {
             const response = await fetch('/api/ferbot/chat', {
@@ -130,8 +128,6 @@ export const FerBot: React.FC = () => {
 
             setMessages(prev => [...prev, assistantMessage]);
         } catch (err) {
-            setError(err instanceof Error ? err.message : t('ferbot.errors.unknown'));
-
             // Show error in chat
             const errorMessage: Message = {
                 role: 'assistant',
