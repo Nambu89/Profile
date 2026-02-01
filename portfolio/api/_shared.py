@@ -148,7 +148,7 @@ class RAGService:
             max_retries=2  # Retry up to 2 times on failure
         )
         self.embedding_service = embedding_service
-        self.model = "gpt-4o-mini"
+        self.model = "gpt-5-mini"
 
     def get_system_prompt(self, language: str = "es") -> str:
         """Get system prompt in specified language"""

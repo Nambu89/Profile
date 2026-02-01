@@ -98,7 +98,7 @@ export const es = {
     placeholder: 'Pregúntame sobre mi experiencia, proyectos...',
     send: 'Enviar',
     welcome: '¡Hola! 👋 Soy FerBot, el alter ego de IA de Fernando. Pregúntame sobre su experiencia, proyectos, skills o cualquier cosa que quieras saber sobre él.',
-    poweredBy: 'Powered by OpenAI GPT-4o-mini',
+    poweredBy: 'Powered by OpenAI GPT-5-mini',
     errors: {
       rateLimit: 'Has alcanzado el límite de mensajes. Por favor, espera unos minutos.',
       serverError: 'Error al conectar con el servidor. Inténtalo de nuevo.',

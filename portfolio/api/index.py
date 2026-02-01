@@ -89,34 +89,8 @@ def check_rate_limit(client_ip: str) -> bool:
     return True
 
 
-@app.middleware("http")
-async def add_security_headers(request: Request, call_next):
-    """Add security headers to all responses"""
-    response = await call_next(request)
-
-    # Security headers (matching Impuestify/OpoGuardia)
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "DENY"
-    response.headers["X-XSS-Protection"] = "1; mode=block"
-    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
-
-    # Content Security Policy
-    response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline'; "
-        "style-src 'self' 'unsafe-inline'; "
-        "img-src 'self' data: https:; "
-        "object-src 'none';"
-    )
-
-    # Hide server information
-    try:
-        del response.headers["Server"]
-    except KeyError:
-        pass
-
-    return response
+# Note: Security headers are configured in vercel.json instead of middleware
+# to avoid conflicts with Vercel's serverless function handler
 
 
 @app.post("/", response_model=ChatResponse)
@@ -249,7 +223,3 @@ async def chat(request: ChatRequest, req: Request):
             status_code=500,
             detail=safe_message
         )
-
-
-# Vercel serverless handler
-handler = app

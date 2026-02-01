@@ -4,8 +4,8 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/api/ferbot/(.*)",
-      "destination": "/api/$1"
+      "source": "/api/ferbot",
+      "destination": "/api"
     },
     {
       "source": "/api/demo/(.*)",
