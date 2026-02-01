@@ -4,7 +4,7 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/api/ferbot",
+      "source": "/api/ferbot/chat",
       "destination": "/api"
     },
     {
