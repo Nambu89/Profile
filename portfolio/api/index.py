@@ -22,7 +22,7 @@ from pydantic import BaseModel, Field
 from openai import OpenAI
 from groq import Groq
 import numpy as np
-import pymupdf4llm
+# import pymupdf4llm  # Not needed - using pre-generated JSON
 
 # ==============================================================================
 # SECURITY MODULE (from _security.py)
@@ -311,17 +311,20 @@ def get_llama_guard() -> LlamaGuard:
 # SHARED SERVICES (from _shared.py)
 # ==============================================================================
 
-class PDFParser:
-    """Parse PDF using PyMuPDF4LLM for LLM-optimized output"""
+class CVDataLoader:
+    """Load pre-processed CV data from JSON"""
 
-    def parse_cv(self, pdf_path: str) -> Dict[str, str]:
-        """Parse CV PDF to markdown"""
+    def load_cv(self, json_path: str) -> Dict[str, str]:
+        """Load CV data from pre-generated JSON file"""
         try:
-            md_text = pymupdf4llm.to_markdown(pdf_path)
+            with open(json_path, 'r', encoding='utf-8') as f:
+                cv_data = json.load(f)
+
             return {
                 "success": True,
-                "content": md_text,
-                "source": "CV_LinkedIn.pdf"
+                "content": cv_data["full_text"],
+                "source": cv_data["metadata"]["source"],
+                "sections": cv_data["sections"]
             }
         except Exception as e:
             return {
@@ -583,18 +586,28 @@ def get_services():
     _embedding_service = EmbeddingService()
     print("[OK] Embedding service initialized")
 
-    # Parse CV
-    cv_path = Path(__file__).parent / "data" / "CV_LinkedIn.pdf"
+    # Load CV from pre-generated JSON
+    cv_json_path = Path(__file__).parent / "data" / "cv_data.json"
 
-    if cv_path.exists():
-        parser = PDFParser()
-        cv_data = parser.parse_cv(str(cv_path))
+    if cv_json_path.exists():
+        loader = CVDataLoader()
+        cv_data = loader.load_cv(str(cv_json_path))
 
         if cv_data["success"]:
-            print(f"[OK] CV parsed successfully ({len(cv_data['content'])} chars)")
+            print(f"[OK] CV loaded successfully ({len(cv_data['content'])} chars)")
 
-            chunks = parser.chunk_content(cv_data["content"], chunk_size=800, overlap=150)
-            print(f"[OK] Created {len(chunks)} chunks")
+            # Use sections from JSON for better chunking
+            chunks = []
+            for i, section in enumerate(cv_data.get("sections", [])):
+                if section.strip():
+                    chunks.append({
+                        "chunk_id": i,
+                        "text": section,
+                        "start": 0,
+                        "end": len(section)
+                    })
+
+            print(f"[OK] Using {len(chunks)} pre-chunked sections")
 
             chunk_texts = [chunk["text"] for chunk in chunks]
             embeddings = _embedding_service.create_embeddings_batch(chunk_texts)
@@ -603,9 +616,9 @@ def get_services():
             _embedding_service.cache_embeddings(chunks, embeddings)
             print("[OK] Embeddings cached")
         else:
-            print(f"[ERROR] Error parsing CV: {cv_data.get('error')}")
+            print(f"[ERROR] Error loading CV: {cv_data.get('error')}")
     else:
-        print(f"[WARNING] CV not found at {cv_path}")
+        print(f"[WARNING] CV JSON not found at {cv_json_path}")
 
     # Initialize RAG service
     _rag_service = RAGService(_embedding_service)
