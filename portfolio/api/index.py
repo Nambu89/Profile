@@ -6,6 +6,7 @@ All code consolidated in single file for Vercel compatibility
 # Standard library imports
 import os
 import re
+import json
 import time
 import unicodedata
 import logging
@@ -331,28 +332,6 @@ class CVDataLoader:
                 "success": False,
                 "error": str(e)
             }
-
-    def chunk_content(self, content: str, chunk_size: int = 800, overlap: int = 150) -> List[Dict]:
-        """Split content into overlapping chunks"""
-        chunks = []
-        start = 0
-        chunk_id = 0
-
-        while start < len(content):
-            end = start + chunk_size
-            chunk_text = content[start:end]
-
-            chunks.append({
-                "chunk_id": chunk_id,
-                "text": chunk_text,
-                "start": start,
-                "end": min(end, len(content))
-            })
-
-            chunk_id += 1
-            start += chunk_size - overlap
-
-        return chunks
 
 
 class EmbeddingService:
