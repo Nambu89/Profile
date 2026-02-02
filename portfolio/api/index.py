@@ -676,7 +676,7 @@ def check_rate_limit(client_ip: str) -> bool:
     return True
 
 
-@app.post("/", response_model=ChatResponse)
+@app.post("/ferbot/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest, req: Request):
     """
     Chat endpoint for FerBot with comprehensive security

@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/api/ferbot/chat",
-      "destination": "/api"
-    },
-    {
       "source": "/api/demo/(.*)",
       "destination": "https://taxia-production.up.railway.app/api/demo/$1"
     },
