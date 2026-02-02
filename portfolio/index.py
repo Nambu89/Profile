@@ -566,7 +566,7 @@ def get_services():
     print("[OK] Embedding service initialized")
 
     # Load CV from pre-generated JSON
-    cv_json_path = Path(__file__).parent / "data" / "cv_data.json"
+    cv_json_path = Path(__file__).parent / "api" / "data" / "cv_data.json"
 
     if cv_json_path.exists():
         loader = CVDataLoader()
@@ -676,7 +676,7 @@ def check_rate_limit(client_ip: str) -> bool:
     return True
 
 
-@app.post("/ferbot/chat", response_model=ChatResponse)
+@app.post("/api/ferbot/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest, req: Request):
     """
     Chat endpoint for FerBot with comprehensive security
