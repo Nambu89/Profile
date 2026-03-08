@@ -139,7 +139,7 @@ export const Contact: React.FC = () => {
                     <div className="contact__cta">
                         <button
                             className="contact__book-button"
-                            data-cal-link="YOUR_CAL_USERNAME/30min"
+                            data-cal-link="fernando-prada-s6nq1v/30min"
                             data-cal-config='{"theme":"dark"}'
                         >
                             <CalendarIcon />
