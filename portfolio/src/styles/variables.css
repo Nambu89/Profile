@@ -5,10 +5,10 @@
 
 :root {
   /* Colors - Forest Green Dark Theme */
-  --color-bg-primary: #0a0f0d;
-  --color-bg-secondary: #111916;
-  --color-bg-elevated: #1a2420;
-  --color-bg-card: #1f2d28;
+  --color-bg-primary: #0a0a0b;
+  --color-bg-secondary: #111113;
+  --color-bg-elevated: #1a1a1f;
+  --color-bg-card: #252530;
   
   --color-accent: #2d8a5e;
   --color-accent-light: #3da873;
@@ -42,6 +42,8 @@
   --text-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 3rem);
   --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 4rem);
   --text-5xl: clamp(3rem, 2rem + 5vw, 6rem);
+  --text-display: clamp(2.5rem, 6vw + 1rem, 6rem);
+  --text-hero: clamp(3rem, 8vw + 1rem, 8rem);
   
   /* Spacing */
   --space-xs: 0.25rem;

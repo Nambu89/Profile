@@ -46,11 +46,12 @@ Profile/
 
 ## Paleta de colores
 
-- Primary: `#6366f1` (indigo)
 - Background: `#0a0a0b` (near-black)
-- Surface: `rgba(255,255,255,0.05)`
-- Text: `#e2e8f0`
-- Accent: `#22d3ee` (cyan)
+- Surfaces: `#111113` → `#1a1a1f` → `#252530` (elevación)
+- Accent primary: `#D2FF00` (electric lime)
+- Accent secondary: `#2d8a5e` (forest green)
+- Text: `#e2e8f0` primary, `#94a3b8` secondary, `#64748b` muted
+- Border: `rgba(255,255,255,0.1)`
 
 ## Reglas críticas
 

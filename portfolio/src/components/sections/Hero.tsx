@@ -1,11 +1,11 @@
 /**
- * Hero Section - Main landing area
+ * Hero Section - Asymmetric layout with kinetic typography
  */
 
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
-import { ParticleBackground, BlurText } from '../ui';
+import { ParticleBackground } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Hero.css';
 
@@ -44,45 +44,80 @@ const getIcon = (iconName: string) => {
     }
 };
 
+/**
+ * Split a string into individual <span> elements for character animation.
+ * Spaces become non-breaking whitespace spans to preserve word gaps.
+ */
+const SplitChars: React.FC<{
+    text: string;
+    className?: string;
+}> = ({ text, className }) => (
+    <>
+        {text.split('').map((char, i) => (
+            <span
+                key={i}
+                className={className}
+                style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}
+            >
+                {char === ' ' ? '\u00A0' : char}
+            </span>
+        ))}
+    </>
+);
+
 export const Hero: React.FC = () => {
     const { t } = useTranslation();
-    const titleRef = useRef<HTMLHeadingElement>(null);
+    const spotlightRef = useRef<HTMLDivElement>(null);
+    const nameRef = useRef<HTMLHeadingElement>(null);
+    const roleRef = useRef<HTMLParagraphElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const proofRef = useRef<HTMLParagraphElement>(null);
+    const proofRef = useRef<HTMLDivElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
     const socialRef = useRef<HTMLDivElement>(null);
+    const visualRef = useRef<HTMLDivElement>(null);
 
+    // Kinetic typography + staggered reveal
     useEffect(() => {
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        if (!nameRef.current) return;
 
-        // Ensure elements are visible first
-        gsap.set([titleRef.current, subtitleRef.current, proofRef.current, ctaRef.current, socialRef.current], {
+        const chars = nameRef.current.querySelectorAll('.hero__char');
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+        // Set initial states
+        gsap.set(chars, { y: '100%', opacity: 0 });
+        gsap.set(
+            [roleRef.current, subtitleRef.current, proofRef.current, ctaRef.current, socialRef.current],
+            { opacity: 0, y: 20 }
+        );
+        gsap.set(visualRef.current, { opacity: 0, scale: 0.8 });
+
+        // Stagger character reveal
+        tl.to(chars, {
+            y: '0%',
             opacity: 1,
-            visibility: 'visible'
-        });
-
-        // Animate in sequence
-        tl.from(titleRef.current, {
-            y: 30,
+            stagger: 0.04,
             duration: 0.8,
             delay: 0.3
         })
-            .from(subtitleRef.current, {
-                y: 20,
-                duration: 0.6
-            }, '-=0.4')
-            .from(proofRef.current, {
-                y: 15,
-                duration: 0.5
-            }, '-=0.3')
-            .from(ctaRef.current, {
-                y: 15,
-                duration: 0.5
-            }, '-=0.2')
-            .from(socialRef.current, {
-                y: 10,
-                duration: 0.4
-            }, '-=0.2');
+        .to(roleRef.current, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.5 }, '-=0.3')
+        .to(proofRef.current, { opacity: 1, y: 0, duration: 0.4 }, '-=0.2')
+        .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.4 }, '-=0.2')
+        .to(socialRef.current, { opacity: 1, y: 0, duration: 0.4 }, '-=0.2')
+        .to(visualRef.current, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.4)' }, '-=0.6');
+    }, []);
+
+    // Cursor spotlight effect
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (spotlightRef.current) {
+                spotlightRef.current.style.background =
+                    `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(210, 255, 0, 0.06), transparent 80%)`;
+            }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
     const handleScrollToProjects = (e: React.MouseEvent) => {
@@ -102,69 +137,74 @@ export const Hero: React.FC = () => {
 
     return (
         <section className="hero" id="hero">
-            {/* Animated Background */}
             <ParticleBackground />
 
+            {/* Cursor spotlight overlay */}
+            <div ref={spotlightRef} className="hero__spotlight" />
 
             <div className="container">
-                {/* Text Content */}
-                <div className="hero__content">
-                    <h1 ref={titleRef} className="hero__title">
-                        <span className="hero__name">
-                            <BlurText text={personalInfo.name} delay={0.3} duration={1} />
-                        </span>
-                        <span className="hero__role">
-                            <BlurText text={t('hero.title')} delay={0.6} duration={1.2} />
-                        </span>
-                    </h1>
+                <div className="hero__grid">
+                    {/* Left column: Text content */}
+                    <div className="hero__content">
+                        <h1 ref={nameRef} className="hero__name">
+                            <SplitChars text={personalInfo.name} className="hero__char" />
+                        </h1>
+                        <p ref={roleRef} className="hero__role">
+                            {t('hero.title')}
+                        </p>
+                        <p ref={subtitleRef} className="hero__subtitle">
+                            {t('hero.subtitle')}
+                        </p>
 
-                    <p ref={subtitleRef} className="hero__subtitle">
-                        {t('hero.subtitle')}
-                    </p>
+                        {/* Proof line */}
+                        <div ref={proofRef} className="hero__proof">
+                            <span className="hero__proof-item">{t('hero.proof1')}</span>
+                            <span className="hero__proof-separator">/</span>
+                            <span className="hero__proof-item">{t('hero.proof2')}</span>
+                            <span className="hero__proof-separator">/</span>
+                            <span className="hero__proof-item">{t('hero.proof3')}</span>
+                        </div>
 
-                    {/* Proof Microcopy */}
-                    <p ref={proofRef} className="hero__proof">
-                        <span className="hero__proof-item">{t('hero.proof1')}</span>
-                        <span className="hero__proof-separator">•</span>
-                        <span className="hero__proof-item">{t('hero.proof2')}</span>
-                        <span className="hero__proof-separator">•</span>
-                        <span className="hero__proof-item">{t('hero.proof3')}</span>
-                    </p>
+                        {/* CTAs */}
+                        <div ref={ctaRef} className="hero__cta">
+                            <a
+                                href="#projects"
+                                onClick={handleScrollToProjects}
+                                className="hero__cta-button hero__cta-button--primary"
+                            >
+                                <span>{t('hero.cta1')}</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <button
+                                onClick={handleOpenFerBot}
+                                className="hero__cta-button hero__cta-button--outline"
+                            >
+                                <span>{t('hero.cta2')}</span>
+                            </button>
+                        </div>
 
-                    {/* Dual CTA Buttons */}
-                    <div ref={ctaRef} className="hero__cta">
-                        <a
-                            href="#projects"
-                            onClick={handleScrollToProjects}
-                            className="hero__cta-button hero__cta-button--primary"
-                        >
-                            <span>{t('hero.cta1')}</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                        <button
-                            onClick={handleOpenFerBot}
-                            className="hero__cta-button hero__cta-button--outline"
-                        >
-                            <span>{t('hero.cta2')}</span>
-                        </button>
+                        {/* Social */}
+                        <div ref={socialRef} className="hero__social">
+                            {socialLinks.map((link) => (
+                                <a
+                                    key={link.id}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hero__social-link"
+                                    aria-label={link.name}
+                                >
+                                    {getIcon(link.icon)}
+                                </a>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Social Links */}
-                    <div ref={socialRef} className="hero__social">
-                        {socialLinks.map((link) => (
-                            <a
-                                key={link.id}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hero__social-link"
-                                aria-label={link.name}
-                            >
-                                {getIcon(link.icon)}
-                            </a>
-                        ))}
+                    {/* Right column: Visual element */}
+                    <div className="hero__visual" ref={visualRef}>
+                        <div className="hero__orb" />
                     </div>
                 </div>
             </div>
