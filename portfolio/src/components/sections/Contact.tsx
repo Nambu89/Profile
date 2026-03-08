@@ -155,9 +155,6 @@ export const Contact: React.FC = () => {
 
             <footer className="contact__footer">
                 <p>
-                    {t('contact.footer')} &#10084;&#65039;
-                </p>
-                <p>
                     &copy; {new Date().getFullYear()} {personalInfo.name}.{' '}
                     {t('contact.rights')}
                 </p>

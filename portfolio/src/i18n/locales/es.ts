@@ -94,7 +94,6 @@ export const es = {
     subtitle: '¿Tienes un proyecto en mente?',
     text: 'Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para aportar valor con soluciones de inteligencia artificial.',
     button: 'Envíame un email',
-    footer: 'Construido con React, TypeScript, Three.js y mucho',
     rights: 'Todos los derechos reservados.'
   },
 

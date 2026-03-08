@@ -94,7 +94,6 @@ export const en = {
     subtitle: 'Have a project in mind?',
     text: "I'm always open to discussing new projects, creative ideas, or opportunities to add value with artificial intelligence solutions.",
     button: 'Send me an email',
-    footer: 'Built with React, TypeScript, Three.js and lots of',
     rights: 'All rights reserved.'
   },
 
