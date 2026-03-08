@@ -6,11 +6,20 @@ import React, { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MagneticButton } from '../ui';
+import { getCalApi } from '@calcom/embed-react';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const CalendarIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+);
 
 const LinkedInIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -48,6 +57,17 @@ export const Contact: React.FC = () => {
     const { t } = useTranslation();
     const titleRef = useRef<HTMLHeadingElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+
+    // Initialize Cal.com embed
+    useEffect(() => {
+        (async function () {
+            const cal = await getCalApi();
+            cal('ui', {
+                theme: 'dark',
+                styles: { branding: { brandColor: '#D2FF00' } },
+            });
+        })();
+    }, []);
 
     useEffect(() => {
         if (!titleRef.current || !contentRef.current) return;
@@ -116,24 +136,23 @@ export const Contact: React.FC = () => {
                     </h2>
                     <p className="contact__text">{t('contact.text')}</p>
 
+                    <div className="contact__cta">
+                        <button
+                            className="contact__book-button"
+                            data-cal-link="YOUR_CAL_USERNAME/30min"
+                            data-cal-config='{"theme":"dark"}'
+                        >
+                            <CalendarIcon />
+                            <span>{t('contact.button')}</span>
+                        </button>
+                    </div>
+
                     <a
                         href={`mailto:${personalInfo.email}`}
                         className="contact__email"
                     >
                         {personalInfo.email}
                     </a>
-
-                    <div className="contact__cta">
-                        <MagneticButton
-                            variant="primary"
-                            size="lg"
-                            href={`mailto:${personalInfo.email}`}
-                            icon={<EmailIcon />}
-                            strength={0.6}
-                        >
-                            {t('contact.button')}
-                        </MagneticButton>
-                    </div>
 
                     <div className="contact__social">
                         {socialLinks.map((link) => (

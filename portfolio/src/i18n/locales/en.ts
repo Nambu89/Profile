@@ -93,7 +93,7 @@ export const en = {
     title: 'Contact',
     subtitle: 'Have a project in mind?',
     text: "I'm always open to discussing new projects, creative ideas, or opportunities to add value with artificial intelligence solutions.",
-    button: 'Send me an email',
+    button: 'Book a meeting',
     rights: 'All rights reserved.'
   },
 

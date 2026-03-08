@@ -93,7 +93,7 @@ export const es = {
     title: 'Contacto',
     subtitle: '¿Tienes un proyecto en mente?',
     text: 'Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para aportar valor con soluciones de inteligencia artificial.',
-    button: 'Envíame un email',
+    button: 'Reserva una reunión',
     rights: 'Todos los derechos reservados.'
   },
 

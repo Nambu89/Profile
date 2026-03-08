@@ -52,6 +52,29 @@
     padding-top: var(--space-md);
 }
 
+.contact__book-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-2xl);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--color-bg-primary);
+    background: var(--color-accent-electric);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out-expo);
+    box-shadow: 0 0 20px var(--color-accent-electric-glow);
+}
+
+.contact__book-button:hover {
+    background: var(--color-accent-electric-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px var(--color-accent-electric-glow), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .contact__social {
     display: flex;
     gap: var(--space-xl);
