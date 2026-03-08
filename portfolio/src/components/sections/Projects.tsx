@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { SectionTitle, Button, ChatDemo, HoverCard } from '../ui';
 import { useScrollAnimation } from '../../hooks';
 import { projects } from '../../data/portfolio';
@@ -52,6 +53,7 @@ const GitHubIcon = () => (
 );
 
 export const Projects: React.FC = () => {
+    const { t } = useTranslation();
     const projectsRef = useScrollAnimation<HTMLDivElement>();
     const highlightedProjects = projects.filter(p => p.highlighted);
     const otherProjects = projects.filter(p => !p.highlighted);
@@ -60,12 +62,12 @@ export const Projects: React.FC = () => {
         <section className="projects section" id="projects">
             <div className="container">
                 <SectionTitle
-                    number="03"
-                    title="Proyectos"
-                    subtitle="Soluciones de IA en producción real"
+                    number={t('projects.number')}
+                    title={t('projects.title')}
+                    subtitle={t('projects.subtitle')}
                 />
 
-                {/* Featured Projects - Case Studies with Live Demos */}
+                {/* Featured Projects - Editorial Sections */}
                 <div ref={projectsRef} className="projects__featured">
                     {highlightedProjects.map((project, index) => {
                         const chatConfig = chatConfigs[project.id];
@@ -73,11 +75,15 @@ export const Projects: React.FC = () => {
 
                         return (
                         <article key={project.id} className={`project-card project-card--featured ${hasDemo ? 'project-card--with-demo' : ''}`}>
+                            {/* Large decorative number */}
+                            <span className="project-card__number" aria-hidden="true">
+                                {String(index + 1).padStart(2, '0')}
+                            </span>
+
                             {/* Project Info */}
                             <div className="project-card__content">
                                 {/* Header */}
                                 <div className="project-card__header">
-                                    <span className="project-card__number">{String(index + 1).padStart(2, '0')}</span>
                                     <div className="project-card__header-tags">
                                         <span className="project-card__status project-card__status--production">
                                             {project.status}
@@ -95,20 +101,20 @@ export const Projects: React.FC = () => {
                                     <div className="project-card__case-study">
                                         {/* Problem */}
                                         <div className="case-study__section">
-                                            <h4 className="case-study__label">Problema</h4>
+                                            <h4 className="case-study__label">{t('projects.problem')}</h4>
                                             <p className="case-study__text">{project.problem}</p>
                                         </div>
 
                                         {/* Approach */}
                                         <div className="case-study__section">
-                                            <h4 className="case-study__label">Solución</h4>
+                                            <h4 className="case-study__label">{t('projects.solution')}</h4>
                                             <p className="case-study__text">{project.approach}</p>
                                         </div>
 
                                         {/* Impact */}
                                         {project.impact && project.impact.length > 0 && (
                                             <div className="case-study__section">
-                                                <h4 className="case-study__label">Impacto</h4>
+                                                <h4 className="case-study__label">{t('projects.impact')}</h4>
                                                 <ul className="case-study__impact-list">
                                                     {project.impact.map((item, i) => (
                                                         <li key={i} className="case-study__impact-item">
@@ -125,7 +131,7 @@ export const Projects: React.FC = () => {
                                         {/* Role (optional) */}
                                         {project.role && (
                                             <div className="case-study__section case-study__section--role">
-                                                <h4 className="case-study__label">Mi rol</h4>
+                                                <h4 className="case-study__label">{t('projects.myRole')}</h4>
                                                 <p className="case-study__text case-study__text--small">{project.role}</p>
                                             </div>
                                         )}
@@ -156,7 +162,7 @@ export const Projects: React.FC = () => {
                                             size="sm"
                                             icon={<ExternalLinkIcon />}
                                         >
-                                            Ir a la app
+                                            {t('projects.goToApp')}
                                         </Button>
                                     )}
                                     {project.githubUrl && (
@@ -167,7 +173,7 @@ export const Projects: React.FC = () => {
                                             size="sm"
                                             icon={<GitHubIcon />}
                                         >
-                                            Código
+                                            {t('projects.code')}
                                         </Button>
                                     )}
                                 </div>
@@ -196,7 +202,7 @@ export const Projects: React.FC = () => {
                 {/* Other Projects */}
                 {otherProjects.length > 0 && (
                     <>
-                        <h3 className="projects__other-title">Otros Proyectos</h3>
+                        <h3 className="projects__other-title">{t('projects.otherProjects')}</h3>
                         <div className="projects__grid">
                             {otherProjects.map((project) => (
                                 <HoverCard key={project.id} intensity={0.5}>
@@ -223,7 +229,7 @@ export const Projects: React.FC = () => {
                                                     rel="noopener noreferrer"
                                                     className="project-card__link"
                                                 >
-                                                    <GitHubIcon /> Ver código
+                                                    <GitHubIcon /> {t('projects.viewCode')}
                                                 </a>
                                             )}
                                         </div>

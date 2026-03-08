@@ -27,7 +27,10 @@ export const es = {
     subtitle: 'De las Fuerzas Armadas a la Arquitectura de IA',
     bio1: 'Soy Fernando Prada, Arquitecto de IA y Líder Técnico en Devoteam. Mi trayectoria es única: del ejército español a la arquitectura de sistemas de inteligencia artificial.',
     bio2: 'Diseño y desarrollo sistemas multi-agente, soluciones RAG y aplicaciones de IA en producción. Mi experiencia militar me enseñó disciplina, liderazgo y trabajo bajo presión, cualidades que aplico cada día en el desarrollo de tecnología.',
-    bio3: 'Actualmente lidero proyectos de IA enterprise mientras desarrollo mis propios productos: Impuestify (asistente fiscal inteligente) y OpoGuardia (plataforma de preparación con IA).'
+    bio3: 'Actualmente lidero proyectos de IA enterprise mientras desarrollo mis propios productos: Impuestify (asistente fiscal inteligente) y OpoGuardia (plataforma de preparación con IA).',
+    statYears: 'Años de Experiencia',
+    statProjects: 'Proyectos en Producción',
+    statCerts: 'Certificaciones'
   },
 
   // Journey
@@ -36,7 +39,9 @@ export const es = {
     title: 'Trayectoria',
     subtitle: 'Evolución profesional',
     tech: 'Tecnología',
-    military: 'Militar'
+    military: 'Militar',
+    description: 'Descripción',
+    period: 'Periodo'
   },
 
   // Projects
@@ -48,6 +53,10 @@ export const es = {
     viewCode: 'Ver código',
     goToApp: 'Ir a la app',
     code: 'Código',
+    problem: 'Problema',
+    solution: 'Solución',
+    impact: 'Impacto',
+    myRole: 'Mi rol',
     production: 'Producción',
     development: 'Desarrollo',
 
@@ -71,6 +80,7 @@ export const es = {
     backend: 'Backend & APIs',
     frontend: 'Frontend',
     cloud: 'Cloud & DevOps',
+    tools: 'Tools & Leadership',
     certifications: 'Certificaciones',
     expert: 'Experto',
     advanced: 'Avanzado',

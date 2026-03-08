@@ -27,7 +27,10 @@ export const en = {
     subtitle: 'From the Armed Forces to AI Architecture',
     bio1: "I'm Fernando Prada, AI Architect and Tech Lead at Devoteam. My path is unique: from the Spanish Army to artificial intelligence systems architecture.",
     bio2: 'I design and develop multi-agent systems, RAG solutions, and production AI applications. My military experience taught me discipline, leadership, and working under pressure—qualities I apply daily in technology development.',
-    bio3: 'Currently, I lead enterprise AI projects while developing my own products: Impuestify (intelligent tax assistant) and OpoGuardia (AI-powered exam preparation platform).'
+    bio3: 'Currently, I lead enterprise AI projects while developing my own products: Impuestify (intelligent tax assistant) and OpoGuardia (AI-powered exam preparation platform).',
+    statYears: 'Years of Experience',
+    statProjects: 'Projects in Production',
+    statCerts: 'Certifications'
   },
 
   // Journey
@@ -36,7 +39,9 @@ export const en = {
     title: 'Journey',
     subtitle: 'Professional evolution',
     tech: 'Technology',
-    military: 'Military'
+    military: 'Military',
+    description: 'Description',
+    period: 'Period'
   },
 
   // Projects
@@ -48,6 +53,10 @@ export const en = {
     viewCode: 'View code',
     goToApp: 'Go to app',
     code: 'Code',
+    problem: 'Problem',
+    solution: 'Solution',
+    impact: 'Impact',
+    myRole: 'My Role',
     production: 'Production',
     development: 'Development',
 
@@ -71,6 +80,7 @@ export const en = {
     backend: 'Backend & APIs',
     frontend: 'Frontend',
     cloud: 'Cloud & DevOps',
+    tools: 'Tools & Leadership',
     certifications: 'Certifications',
     expert: 'Expert',
     advanced: 'Advanced',

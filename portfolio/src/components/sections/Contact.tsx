@@ -1,12 +1,16 @@
 /**
- * Contact Section - Call to action and contact info
+ * Contact Section - Full-screen CTA with split-text headline reveal
  */
 
-import React from 'react';
-import { SectionTitle, MagneticButton } from '../ui';
-import { useScrollAnimation } from '../../hooks';
+import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { MagneticButton } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Contact.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const LinkedInIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -27,36 +31,107 @@ const EmailIcon = () => (
     </svg>
 );
 
+const getIcon = (iconName: string) => {
+    switch (iconName) {
+        case 'linkedin':
+            return <LinkedInIcon />;
+        case 'github':
+            return <GitHubIcon />;
+        case 'mail':
+            return <EmailIcon />;
+        default:
+            return null;
+    }
+};
+
 export const Contact: React.FC = () => {
-    const contentRef = useScrollAnimation<HTMLDivElement>();
+    const { t } = useTranslation();
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!titleRef.current || !contentRef.current) return;
+
+        const titleText = titleRef.current.textContent || '';
+        titleRef.current.innerHTML = '';
+
+        const chars = titleText.split('').map((char) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.display = 'inline-block';
+            span.style.opacity = '0';
+            span.style.transform = 'translateY(40px)';
+            titleRef.current?.appendChild(span);
+            return span;
+        });
+
+        gsap.to(chars, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.02,
+            ease: 'power4.out',
+            scrollTrigger: {
+                trigger: titleRef.current,
+                start: 'top 80%',
+                once: true,
+            },
+        });
+
+        const contentElements = contentRef.current.querySelectorAll(
+            '.contact__text, .contact__email, .contact__cta, .contact__social'
+        );
+
+        gsap.from(contentElements, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: contentRef.current,
+                start: 'top 70%',
+                once: true,
+            },
+        });
+
+        return () => {
+            ScrollTrigger.getAll().forEach((trigger) => {
+                if (
+                    trigger.trigger === titleRef.current ||
+                    trigger.trigger === contentRef.current
+                ) {
+                    trigger.kill();
+                }
+            });
+        };
+    }, []);
 
     return (
         <section className="contact section" id="contact">
             <div className="container">
                 <div ref={contentRef} className="contact__content">
-                    <SectionTitle
-                        number="05"
-                        title="Contacto"
-                        subtitle="¿Tienes un proyecto de IA? Hablemos"
-                        align="center"
-                    />
+                    <h2 ref={titleRef} className="contact__title">
+                        {t('contact.subtitle')}
+                    </h2>
+                    <p className="contact__text">{t('contact.text')}</p>
 
-                    <div className="contact__text">
-                        <p>
-                            Siempre estoy abierto a discutir nuevos proyectos, ideas creativas
-                            u oportunidades para aportar valor con soluciones de inteligencia artificial.
-                        </p>
-                    </div>
+                    <a
+                        href={`mailto:${personalInfo.email}`}
+                        className="contact__email"
+                    >
+                        {personalInfo.email}
+                    </a>
 
                     <div className="contact__cta">
                         <MagneticButton
-                            href={`mailto:${personalInfo.email}`}
                             variant="primary"
                             size="lg"
+                            href={`mailto:${personalInfo.email}`}
                             icon={<EmailIcon />}
                             strength={0.6}
                         >
-                            Envíame un email
+                            {t('contact.button')}
                         </MagneticButton>
                     </div>
 
@@ -68,10 +143,9 @@ export const Contact: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="contact__social-link"
-                                aria-label={`Visitar ${link.name}`}
+                                aria-label={link.name}
                             >
-                                {link.icon === 'linkedin' && <LinkedInIcon />}
-                                {link.icon === 'github' && <GitHubIcon />}
+                                {getIcon(link.icon)}
                                 <span>{link.name}</span>
                             </a>
                         ))}
@@ -79,15 +153,14 @@ export const Contact: React.FC = () => {
                 </div>
             </div>
 
-            <footer className="footer">
-                <div className="container">
-                    <p className="footer__text">
-                        Diseñado y desarrollado por <strong>{personalInfo.name}</strong>
-                    </p>
-                    <p className="footer__copyright">
-                        © {new Date().getFullYear()} Todos los derechos reservados.
-                    </p>
-                </div>
+            <footer className="contact__footer">
+                <p>
+                    {t('contact.footer')} &#10084;&#65039;
+                </p>
+                <p>
+                    &copy; {new Date().getFullYear()} {personalInfo.name}.{' '}
+                    {t('contact.rights')}
+                </p>
             </footer>
         </section>
     );
