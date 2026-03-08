@@ -100,6 +100,13 @@ export const FerBot: React.FC = () => {
         setIsLoading(true);
 
         try {
+            // Build conversation history (exclude welcome message, last 6 messages)
+            const allMessages = [...messages, userMessage];
+            const conversationHistory = allMessages
+                .slice(1) // Skip welcome message (first assistant message)
+                .slice(-6) // Keep only last 6 messages
+                .map(({ role, content }) => ({ role, content }));
+
             const response = await fetch('/api/ferbot/chat', {
                 method: 'POST',
                 headers: {
@@ -107,7 +114,8 @@ export const FerBot: React.FC = () => {
                 },
                 body: JSON.stringify({
                     question: userMessage.content,
-                    language: i18n.language
+                    language: i18n.language,
+                    conversation_history: conversationHistory
                 })
             });
 
@@ -115,14 +123,18 @@ export const FerBot: React.FC = () => {
                 if (response.status === 429) {
                     throw new Error(t('ferbot.errors.rateLimit'));
                 }
+                if (response.status === 403) {
+                    throw new Error(t('ferbot.errors.serverError'));
+                }
                 throw new Error(t('ferbot.errors.serverError'));
             }
 
             const data = await response.json();
+            const answerText = data.answer || t('ferbot.errors.unknown');
 
             const assistantMessage: Message = {
                 role: 'assistant',
-                content: data.answer,
+                content: answerText,
                 timestamp: new Date()
             };
 

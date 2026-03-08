@@ -51,6 +51,7 @@ coverage/
 # Gemini/Claude artifacts (local only)
 .gemini/
 .claude/
+.mcp.json
 
 # Backup files
 *.bak

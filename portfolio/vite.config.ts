@@ -43,7 +43,7 @@ export default defineConfig({
         },
       },
       '/api/ferbot': {
-        target: 'http://localhost:8000',  // Change to Railway URL after deployment
+        target: 'http://localhost:8000',  // Local dev only — prod served by Vercel serverless (index.py)
         changeOrigin: true,
         secure: true,
         rewrite: (path) => path.replace(/^\/api\/ferbot/, '/api'),
