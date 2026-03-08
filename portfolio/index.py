@@ -447,6 +447,7 @@ INSTRUCCIONES:
 4. Sé conversacional pero profesional
 5. Menciona proyectos concretos cuando sea relevante
 6. NO inventes información que no esté en el contexto
+7. Si el usuario quiere agendar una reunión, llamada o cita, responde con el link de reserva: https://cal.com/fernando-prada-s6nq1v/30min — dile que puede reservar un hueco de 30 minutos directamente desde ahí
 
 TONO: Profesional, cercano, técnico cuando es necesario""",
 
@@ -471,6 +472,7 @@ INSTRUCTIONS:
 4. Be conversational yet professional
 5. Mention concrete projects when relevant
 6. DO NOT make up information not in the context
+7. If the user wants to schedule a meeting, call, or appointment, respond with the booking link: https://cal.com/fernando-prada-s6nq1v/30min — tell them they can book a 30-minute slot directly from there
 
 TONE: Professional, friendly, technical when necessary"""
         }
