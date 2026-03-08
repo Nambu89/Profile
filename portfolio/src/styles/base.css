@@ -175,6 +175,28 @@ button {
     font-family: var(--font-mono);
 }
 
+/* Skip to Content Link */
+.skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10001;
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-accent-electric);
+    color: var(--color-bg-primary);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    border-radius: 0 0 4px 4px;
+    text-decoration: none;
+    transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+    top: 0;
+    color: var(--color-bg-primary);
+}
+
 /* Screen Reader Only */
 .sr-only {
     position: absolute;

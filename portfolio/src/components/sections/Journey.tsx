@@ -25,28 +25,38 @@ export const Journey: React.FC = () => {
         const progressBar = progressRef.current;
         if (!container || !scroller) return;
 
-        // Wait for layout to settle
-        const ctx = gsap.context(() => {
-            const totalWidth = scroller.scrollWidth - container.offsetWidth;
+        // Delay initialization to let lazy-loaded layout settle and prevent auto-scroll
+        const timer = setTimeout(() => {
+            const ctx = gsap.context(() => {
+                ScrollTrigger.refresh();
+                const totalWidth = scroller.scrollWidth - container.offsetWidth;
 
-            gsap.to(scroller, {
-                x: -totalWidth,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: container,
-                    pin: true,
-                    scrub: 1,
-                    end: () => `+=${totalWidth}`,
-                    onUpdate: (self) => {
-                        if (progressBar) {
-                            progressBar.style.width = `${self.progress * 100}%`;
-                        }
+                gsap.to(scroller, {
+                    x: -totalWidth,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: container,
+                        pin: true,
+                        scrub: 1,
+                        end: () => `+=${totalWidth}`,
+                        onUpdate: (self) => {
+                            if (progressBar) {
+                                progressBar.style.width = `${self.progress * 100}%`;
+                            }
+                        },
                     },
-                },
-            });
-        }, container);
+                });
+            }, container);
 
-        return () => ctx.revert();
+            // Store ctx for cleanup
+            (container as HTMLDivElement & { _gsapCtx?: gsap.Context })._gsapCtx = ctx;
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            const ctx = (container as HTMLDivElement & { _gsapCtx?: gsap.Context })._gsapCtx;
+            if (ctx) ctx.revert();
+        };
     }, []);
 
     return (

@@ -1,0 +1,59 @@
+# Fernando Prada
+
+> AI Architect & Tech Lead at Devoteam (Spain). Specialist in multi-agent systems, RAG architectures, and production AI solutions. Building intelligent systems with Azure OpenAI, LangChain, FastAPI, and React.
+
+## About
+
+Fernando Prada is an AI Architect and Tech Lead based in Zaragoza, Spain, currently working at Devoteam. His career path is unique: from the Spanish Armed Forces to artificial intelligence systems architecture. He designs and builds production-grade AI systems including multi-agent orchestration, retrieval-augmented generation (RAG) pipelines, and conversational AI platforms. His technical stack spans Azure OpenAI, LangChain, LangGraph, FastAPI, React, and TypeScript. He holds the Microsoft Azure AI Engineer Associate certification.
+
+## Key Links
+
+- [Portfolio](https://fernandoprada.com): Personal portfolio showcasing projects, skills, and professional experience
+- [About](https://fernandoprada.com/#about): Background — from the Spanish Armed Forces to AI Architecture
+- [Projects](https://fernandoprada.com/#projects): Featured AI and software engineering projects in production
+- [Skills](https://fernandoprada.com/#skills): Technical skills and competencies
+- [Contact](https://fernandoprada.com/#contact): Get in touch or schedule a call
+
+## Products
+
+- [Impuestify](https://impuestify.com): AI-powered tax assistant that helps users navigate Spanish tax obligations using RAG, multi-agent systems (CoordinatorAgent, TaxAgent, PayslipAgent), and GPT-5-mini. Compliant with EU AI Act and GDPR. 95%+ accuracy on verified tax queries.
+- [OpoGuardia](https://opoguardia.com): Intelligent exam preparation platform for Spanish civil service exams (oposiciones de Guardia Civil) with AI-generated adaptive practice tests, RAG-powered tutoring, and multi-tenant support for academies. 60% reported reduction in preparation time.
+
+## Professional Experience
+
+- **Tech Lead & AI Architect** at Devoteam Drago SAU (May 2025 – Present): Leading AI projects and enterprise solution architecture. Multi-agent systems, RAG with Azure OpenAI, technical team leadership.
+- **IT Department Manager** at Grupo SVAN (Jul 2024 – May 2025): Led digital transformation, built AmazonIA (e-commerce sync bot) and AI Technical Support Assistant.
+- **Professional Soldier** in Spanish Army (Oct 2016 – Feb 2024): 7+ years of service developing leadership, discipline, strategic planning, and high-pressure decision making.
+
+## Professional Links
+
+- [LinkedIn](https://www.linkedin.com/in/fernandopradagorge/): Professional profile and network
+- [GitHub](https://github.com/Nambu89): Open-source contributions and repositories
+- [Schedule a Call](https://cal.com/fernando-prada-s6nq1v/30min): Book a 30-minute meeting
+
+## Expertise
+
+- Multi-agent systems (LangGraph, LangChain, custom orchestration)
+- Retrieval-Augmented Generation (RAG) pipelines
+- Azure OpenAI Service and GPT integration
+- Production AI security (Llama Guard, prompt injection protection, PII detection)
+- EU AI Act and GDPR compliance for AI systems
+- FastAPI backend development
+- React + TypeScript frontend
+- Cloud architecture (Azure, Vercel, Railway)
+- Conversational AI and chatbot design
+- Tech leadership and solution architecture
+
+## Certifications
+
+- Azure AI Engineer Associate (Microsoft, Dec 2025)
+- Generative AI with Azure OpenAI & Semantic Kernel (Microsoft Applied Skills, Jan 2026)
+- NLP with Azure AI Language (Microsoft Applied Skills, Jan 2026)
+- Azure AI Fundamentals (Microsoft, Jul 2025)
+- AI Engineer Level 3 (Devoteam, Dec 2025)
+
+## Contact
+
+- Email: fernandopradagorge@gmail.com
+- Location: Zaragoza, Spain
+- Booking: https://cal.com/fernando-prada-s6nq1v/30min

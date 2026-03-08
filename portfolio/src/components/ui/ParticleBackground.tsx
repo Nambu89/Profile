@@ -19,6 +19,9 @@ export const ParticleBackground: React.FC = () => {
     const particlesRef = useRef<Particle[]>([]);
     const mouseRef = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number | undefined>(undefined);
+    const lastFrameTimeRef = useRef<number>(0);
+    const TARGET_FPS = 30;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -35,8 +38,10 @@ export const ParticleBackground: React.FC = () => {
         resize();
         window.addEventListener('resize', resize);
 
-        // Initialize particles
-        const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 100);
+        // Initialize particles — fewer on mobile for performance
+        const isMobile = canvas.width < 768;
+        const maxParticles = isMobile ? 40 : 100;
+        const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 15000), maxParticles);
         particlesRef.current = Array.from({ length: particleCount }, () => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
@@ -51,9 +56,16 @@ export const ParticleBackground: React.FC = () => {
         };
         window.addEventListener('mousemove', handleMouseMove);
 
-        // Animation loop
-        const animate = () => {
+        // Animation loop — throttled to TARGET_FPS
+        const animate = (timestamp: number) => {
             if (!canvas || !ctx) return;
+
+            const elapsed = timestamp - lastFrameTimeRef.current;
+            if (elapsed < FRAME_INTERVAL) {
+                animationFrameRef.current = requestAnimationFrame(animate);
+                return;
+            }
+            lastFrameTimeRef.current = timestamp - (elapsed % FRAME_INTERVAL);
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -108,7 +120,7 @@ export const ParticleBackground: React.FC = () => {
             animationFrameRef.current = requestAnimationFrame(animate);
         };
 
-        animate();
+        animationFrameRef.current = requestAnimationFrame(animate);
 
         // Cleanup
         return () => {
@@ -121,7 +133,7 @@ export const ParticleBackground: React.FC = () => {
     }, []);
 
     return (
-        <div className="particle-background">
+        <div className="particle-background" aria-hidden="true">
             <canvas ref={canvasRef} className="particle-background__canvas" />
             {/* Gradient orbs for depth */}
             <div className="particle-background__orb particle-background__orb--1" />

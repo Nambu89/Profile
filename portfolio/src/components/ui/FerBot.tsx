@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { track } from '@vercel/analytics';
 import gsap from 'gsap';
 import './FerBot.css';
 
@@ -160,6 +161,9 @@ export const FerBot: React.FC = () => {
     };
 
     const toggleChat = () => {
+        if (!isOpen) {
+            track('ferbot_opened');
+        }
         setIsOpen(!isOpen);
     };
 
@@ -186,7 +190,7 @@ export const FerBot: React.FC = () => {
 
             {/* Chat Interface */}
             {isOpen && (
-                <div ref={chatRef} className="ferbot__chat">
+                <div ref={chatRef} className="ferbot__chat" role="dialog" aria-label="FerBot Chat">
                     {/* Header */}
                     <div className="ferbot__header">
                         <div className="ferbot__header-info">
@@ -205,7 +209,7 @@ export const FerBot: React.FC = () => {
                     </div>
 
                     {/* Messages */}
-                    <div className="ferbot__messages">
+                    <div className="ferbot__messages" role="log" aria-live="polite" aria-label="Chat messages">
                         {messages.map((message, index) => (
                             <div
                                 key={index}

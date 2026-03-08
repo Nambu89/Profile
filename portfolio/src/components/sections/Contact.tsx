@@ -4,6 +4,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { track } from '@vercel/analytics';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getCalApi } from '@calcom/embed-react';
@@ -141,6 +142,7 @@ export const Contact: React.FC = () => {
                             className="contact__book-button"
                             data-cal-link="fernando-prada-s6nq1v/30min"
                             data-cal-config='{"theme":"dark"}'
+                            onClick={() => track('booking_clicked', { source: 'contact' })}
                         >
                             <CalendarIcon />
                             <span>{t('contact.button')}</span>

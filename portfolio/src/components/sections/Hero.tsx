@@ -4,6 +4,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { track } from '@vercel/analytics';
 import gsap from 'gsap';
 import { ParticleBackground } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
@@ -122,12 +123,13 @@ export const Hero: React.FC = () => {
 
     const handleScrollToProjects = (e: React.MouseEvent) => {
         e.preventDefault();
+        track('cta_view_projects');
         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
     };
 
     const handleOpenFerBot = (e: React.MouseEvent) => {
         e.preventDefault();
-        // Trigger FerBot open by dispatching a custom event
+        track('cta_talk_ferbot');
         window.dispatchEvent(new CustomEvent('openFerBot'));
     };
 
