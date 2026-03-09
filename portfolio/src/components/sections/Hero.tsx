@@ -2,13 +2,18 @@
  * Hero Section - Asymmetric layout with kinetic typography
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { track } from '@vercel/analytics';
 import gsap from 'gsap';
 import { ParticleBackground } from '../ui';
 import { personalInfo, socialLinks } from '../../data/portfolio';
 import './Hero.css';
+
+// Lazy load 3D orb — heavy WebGL dependency
+const FloatingOrb = lazy(() =>
+    import('../three/FloatingOrb').then(m => ({ default: m.FloatingOrb }))
+);
 
 // SVG Icons
 const ArrowDown = () => (
@@ -204,9 +209,11 @@ export const Hero: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right column: Visual element */}
+                    {/* Right column: 3D interactive orb */}
                     <div className="hero__visual" ref={visualRef}>
-                        <div className="hero__orb" />
+                        <Suspense fallback={<div className="hero__orb" />}>
+                            <FloatingOrb />
+                        </Suspense>
                     </div>
                 </div>
             </div>
